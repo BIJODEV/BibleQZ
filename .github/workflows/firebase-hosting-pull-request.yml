@@ -17,5 +17,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIBLEQ_66551 }}
-          projectId: bibleq-66551
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIBLEQZ }}
+          projectId: bibleqz
