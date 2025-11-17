@@ -2,10 +2,10 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 const MetaTags = ({ 
-  title = "BibleQ - Create & Share Bible Quizzes", 
-  description = "Create interactive Bible quizzes for your study group. Share links and get real-time results. Perfect for churches, small groups, and personal meditation.",
-  keywords = "bible quiz, bible study, scripture quiz, bible meditation, christian app, bible questions",
-  image = "/bibleq-og-image.jpg",
+  title = "BibleQ - Create Interactive Bible Quizzes for Groups", 
+  description = "Free Bible quiz creator for churches & study groups. Create, share, track results in real-time. No login required for participants.",
+  keywords = "create bible quiz, bible study app, scripture quiz maker, bible trivia creator, christian education tools",
+  image = "https://bibleqz.web.app/og-image.jpg",
   url = "https://bibleqz.web.app",
   type = "website"
 }) => {
