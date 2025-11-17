@@ -6,7 +6,7 @@ const MetaTags = ({
   description = "Create interactive Bible quizzes for your study group. Share links and get real-time results. Perfect for churches, small groups, and personal meditation.",
   keywords = "bible quiz, bible study, scripture quiz, bible meditation, christian app, bible questions",
   image = "/bibleq-og-image.jpg",
-  url = "https://bibleq-66551.web.app",
+  url = "https://bibleqz.web.app",
   type = "website"
 }) => {
   return (
