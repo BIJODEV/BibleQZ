@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bibleq-66551.web.app/sitemap.xml
+
+# Block admin pages if any
+Disallow: /admin
+Disallow: /private
