@@ -288,9 +288,9 @@ const Home = () => {
       </section>
 
       {/* Footer Note - More Compact */}
-      <div className="text-center py-4 md:py-6 text-gray-500 text-xs md:text-sm px-4">
+      {/* <div className="text-center py-4 md:py-6 text-gray-500 text-xs md:text-sm px-4">
         <p>Trusted worldwide • 100% Free • No Card Required</p>
-      </div>
+      </div> */}
     </div>
   );
 };
