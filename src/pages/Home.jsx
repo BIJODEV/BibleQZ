@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import MetaTags from '../components/SEO/MetaTags';
+import bibleGamesImage from '../assets/images/games.png';
+
 
 const Home = () => {
   const { user } = useAuth();
@@ -234,8 +236,12 @@ const Home = () => {
 
             {/* Games Preview Card - More Compact */}
             <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-              <div className="aspect-video bg-gradient-to-br from-bible-blue to-bible-purple rounded-lg mb-3 flex items-center justify-center">
-                <span className="text-3xl md:text-4xl text-white">📖</span>
+              <div className="aspect-video bg-gradient-to-br from-bible-blue to-bible-purple rounded-lg mb-3 flex items-center overflow-hidden">
+                <img 
+                    src={bibleGamesImage} 
+                    alt="Bible Games Preview"
+                    className="w-full h-full object-cover"
+                  />
               </div>
               <h4 className="text-base md:text-lg font-semibold text-bible-blue mb-2 text-center">
                 Bible Games
