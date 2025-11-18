@@ -29,14 +29,13 @@ const Footer = () => {
             <Link to="/create" className="text-blue-200 hover:text-white transition-colors">
               Create Quiz
             </Link>
-            <a 
-              href="https://bijodev.github.io/bible-quiz-app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-blue-200 hover:text-white transition-colors"
-            >
+            <Link to="/games" className="text-blue-200 hover:text-white transition-colors">
               Games
-            </a>
+            </Link>
+            {/* Add Contact Link */}
+            <Link to="/contact" className="text-blue-200 hover:text-white transition-colors">
+              Contact
+            </Link>
           </div>
         </div>
       </div>

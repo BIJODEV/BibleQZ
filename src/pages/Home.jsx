@@ -43,15 +43,17 @@ const Home = () => {
                 Quiz History
               </Link>
             )}
-            <a 
+            {/* <a 
               href="https://bijodev.github.io/bible-quiz-app/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-bible-gold hover:bg-yellow-600 text-white font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-lg transition-colors duration-300 text-center flex items-center justify-center space-x-2"
-            >
+            > */}
+            <Link to="/games" className="bg-bible-gold hover:bg-yellow-600 text-white font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-lg transition-colors duration-300 text-center flex items-center justify-center space-x-2">
               <span>🎮</span>
               <span>Games</span>
-            </a>
+            </Link>
+            {/* </a> */}
           </div>
         </div>
       </section>
@@ -223,15 +225,18 @@ const Home = () => {
                   </div>
                 ))}
               </div>
-              <a 
+              
+              {/* <a 
                 href="https://bijodev.github.io/bible-quiz-app/" 
                 target="_blank" 
-                rel="noopener noreferrer"
+                rel="noopener noreferrer" */}
+              <Link to="/games"
                 className="inline-flex items-center justify-center space-x-2 bg-bible-gold hover:bg-yellow-600 text-white font-semibold text-sm md:text-base px-4 md:px-6 py-2 md:py-3 rounded-lg transition-colors duration-300"
               >
                 <span>Play Games</span>
                 <span>🎯</span>
-              </a>
+                </Link>
+              {/* </a> */}
             </div>
 
             {/* Games Preview Card - More Compact */}
@@ -268,17 +273,20 @@ const Home = () => {
           Join leaders transforming Bible teaching with interactive quizzes.
         </p>
         <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-3">
-          <Link to="/create" className="bg-white text-bible-blue hover:bg-gray-100 font-semibold text-sm md:text-base px-4 md:px-6 py-2 md:py-3 rounded-lg transition-colors duration-300">
+          <Link to="/create" className="border border-white text-white hover:bg-white hover:text-bible-blue font-semibold text-sm md:text-base px-4 md:px-6 py-2 md:py-3 rounded-lg transition-colors duration-300 text-center">
             Create First Quiz
           </Link>
-          <a 
+          {/* <a 
             href="https://bijodev.github.io/bible-quiz-app/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="border border-white text-white hover:bg-white hover:text-bible-blue font-semibold text-sm md:text-base px-4 md:px-6 py-2 md:py-3 rounded-lg transition-colors duration-300 text-center"
           >
             Explore Games
-          </a>
+          </a> */}
+          <Link to="/games" className="border border-white text-white hover:bg-white hover:text-bible-blue font-semibold text-sm md:text-base px-4 md:px-6 py-2 md:py-3 rounded-lg transition-colors duration-300 text-center">
+             Explore Games
+          </Link>
         </div>
         {user && (
           <p className="text-blue-100 mt-3 text-xs md:text-sm">

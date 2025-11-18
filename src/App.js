@@ -5,11 +5,14 @@ import { Helmet } from 'react-helmet';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
+import Contact from './components/Layout/Contact';
 import Home from './pages/Home';
 import CreateQuiz from './pages/CreateQuiz';
 import TakeQuiz from './pages/TakeQuiz';
 import Results from './pages/Results';
 import ImportResults from './pages/ImportResults';
+import GamesApp from './components/games/GamesApp';
+
 import './index.css';
 
 function App() {
@@ -30,6 +33,8 @@ function App() {
                 <Route path="/quiz" element={<TakeQuiz />} />
                 <Route path="/results" element={<Results />} />
                 <Route path="/import-results" element={<ImportResults />} />
+                <Route path="/games" element={<GamesApp />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route 
                   path="/create" 
                   element={

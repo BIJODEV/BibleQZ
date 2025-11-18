@@ -26,14 +26,14 @@ const Header = () => {
             <Link to="/create" className="hover:text-bible-gold transition-colors font-medium">
               Create Quiz
             </Link>
-            <a 
-              href="https://bijodev.github.io/bible-quiz-app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-bible-gold transition-colors font-medium flex items-center space-x-1"
-            >
-              <span>Games</span>
-            </a>
+
+            <Link to="/games" className="hover:text-bible-gold transition-colors font-medium flex items-center space-x-1">
+              Games
+            </Link>
+
+            <Link to="/contact" className="hover:text-bible-gold transition-colors font-medium">
+              Contact
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -62,15 +62,21 @@ const Header = () => {
             >
               Create Quiz
             </Link>
-            <a 
-              href="https://bijodev.github.io/bible-quiz-app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <Link 
+              to="/games"
               className="block hover:text-bible-gold transition-colors font-medium py-2 flex items-center space-x-2"
               onClick={() => setIsMenuOpen(false)}
+              >
+              Games
+            </Link>
+
+            <Link 
+              to="/contact" 
+              className="block hover:text-bible-gold transition-colors font-medium py-2"
+              onClick={() => setIsMenuOpen(false)}
             >
-              <span>Games</span>
-            </a>
+              Contact
+            </Link>
           </nav>
         )}
       </div>
