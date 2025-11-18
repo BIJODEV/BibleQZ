@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import { Helmet } from 'react-helmet';
+import MetaTags from './components/SEO/MetaTags'; // Import your MetaTags component
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
@@ -18,11 +18,11 @@ import './index.css';
 function App() {
   return (
     <>
-      <Helmet>
-        <title>BibleQ - Bible Quiz App</title>
-        <meta name="description" content="Create and take interactive Bible quizzes. Perfect for Bible study groups, Sunday schools, and personal meditation." />
-        <meta name="keywords" content="bible, quiz, christian, bible study, scripture, meditation" />
-      </Helmet>
+      <MetaTags 
+        title="BibleQ - Create & Share Bible Quizzes | Free Bible Games"
+        description="Create custom Bible quizzes and play interactive Bible games. Share with friends, family, and church groups. Perfect for Bible study."
+        keywords="bible quiz, bible games, scripture, christian, bible study, church games"
+      />
       <AuthProvider>
         <Router>
           <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex flex-col">
