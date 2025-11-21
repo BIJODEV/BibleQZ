@@ -33,8 +33,7 @@ const MetaTags = ({
       
       {/* Additional SEO */}
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href={window.location.href} />
-
+      <link rel="canonical" href={url} />   
     </Helmet>
   );
 };
