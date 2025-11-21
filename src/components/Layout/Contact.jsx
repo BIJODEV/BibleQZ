@@ -21,7 +21,7 @@ const Contact = () => {
         </div>
         
         <p className="text-sm text-gray-500">
-          We appreciate all feedback and ideas to make BibleQ better for everyone!
+          We appreciate all feedback and ideas to make BibleQZ better for everyone!
         </p>
       </div>
     </div>
