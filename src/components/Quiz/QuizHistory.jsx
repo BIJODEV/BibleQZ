@@ -122,7 +122,6 @@ const QuizHistory = ({ onSelectQuiz, onClose }) => {
           </div>
 
         {/* Participant Results */}
-        // In the Results View section, replace the participant results part:
           <div>
             <h4 className="font-semibold text-bible-blue mb-4">
               🏆 Participant Results

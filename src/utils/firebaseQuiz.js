@@ -250,8 +250,8 @@ export const getQuizResultsFromFirestore = async (quizId) => {
           questions: quizData.questions,
           description: quizData.description
         },
-        results: results,
-        winners: winners, // Add winners array
+        results: winners, // Return SORTED results here!
+        winners: winners, // Add winners array for compatibility
         totalParticipants: quizData.totalParticipants || 0,
         createdAt: quizData.createdAt,
         lastUpdated: quizData.lastUpdated
@@ -272,7 +272,7 @@ export const calculateWinners = (results) => {
   
   // Sort results by score (descending) and then by timestamp (ascending - earlier is better)
   const sortedResults = [...results].sort((a, b) => {
-    // First compare by score
+    // First compare by score (higher score should come first)
     if (b.score !== a.score) {
       return b.score - a.score;
     }
