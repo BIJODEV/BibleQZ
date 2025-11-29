@@ -47,7 +47,6 @@ export const getQuizFromFirestore = async (quizId) => {
 };
 
 // Submit results to Firestore
-// Submit results to Firestore with duplicate prevention
 export const submitQuizResults = async (quizId, result) => {
   try {
     const quizRef = doc(db, 'quizzes', quizId);
@@ -266,18 +265,30 @@ export const getQuizResultsFromFirestore = async (quizId) => {
   }
 };
 
-// Calculate winners based on score and time
+// Calculate winners based on score and time TAKEN
 export const calculateWinners = (results) => {
   if (!results || results.length === 0) return [];
   
-  // Sort results by score (descending) and then by timestamp (ascending - earlier is better)
-  const sortedResults = [...results].sort((a, b) => {
+  // Add timeTaken calculation to each result
+  const resultsWithTime = results.map(result => {
+    const startTime = new Date(result.timestamp);
+    const endTime = result.completedAt ? new Date(result.completedAt) : new Date(result.timestamp);
+    const timeTaken = Math.round((endTime - startTime) / 1000); // Time in seconds
+    
+    return {
+      ...result,
+      timeTaken: timeTaken
+    };
+  });
+  
+  // Sort results by score (descending) and then by time taken (ascending - lower is better)
+  const sortedResults = [...resultsWithTime].sort((a, b) => {
     // First compare by score (higher score should come first)
     if (b.score !== a.score) {
       return b.score - a.score;
     }
-    // If scores are equal, compare by timestamp (earlier timestamp wins)
-    return new Date(a.timestamp) - new Date(b.timestamp);
+    // If scores are equal, compare by time taken (lower time wins)
+    return a.timeTaken - b.timeTaken;
   });
   
   return sortedResults;
