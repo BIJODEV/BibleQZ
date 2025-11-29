@@ -170,34 +170,34 @@ export const getUserQuizHistory = async (userId) => {
 };
 
 // Get quiz results from Firestore
-export const getQuizResultsFromFirestore = async (quizId) => {
-  try {
-    const quizRef = doc(db, 'quizzes', quizId);
-    const quizDoc = await getDoc(quizRef);
+// export const getQuizResultsFromFirestore = async (quizId) => {
+//   try {
+//     const quizRef = doc(db, 'quizzes', quizId);
+//     const quizDoc = await getDoc(quizRef);
     
-    if (quizDoc.exists()) {
-      const quizData = quizDoc.data();
-      return {
-        quiz: {
-          title: quizData.title,
-          passage: quizData.passage,
-          questions: quizData.questions,
-          description: quizData.description
-        },
-        results: quizData.results || [],
-        totalParticipants: quizData.totalParticipants || 0,
-        createdAt: quizData.createdAt,
-        lastUpdated: quizData.lastUpdated
-      };
-    } else {
-      console.log('No such quiz found!');
-      return null;
-    }
-  } catch (error) {
-    console.error('Error getting quiz results:', error);
-    return null;
-  }
-};
+//     if (quizDoc.exists()) {
+//       const quizData = quizDoc.data();
+//       return {
+//         quiz: {
+//           title: quizData.title,
+//           passage: quizData.passage,
+//           questions: quizData.questions,
+//           description: quizData.description
+//         },
+//         results: quizData.results || [],
+//         totalParticipants: quizData.totalParticipants || 0,
+//         createdAt: quizData.createdAt,
+//         lastUpdated: quizData.lastUpdated
+//       };
+//     } else {
+//       console.log('No such quiz found!');
+//       return null;
+//     }
+//   } catch (error) {
+//     console.error('Error getting quiz results:', error);
+//     return null;
+//   }
+// };
 
 // Get user's created quizzes with results
 export const getUserQuizzesWithResults = async (userId) => {
@@ -228,4 +228,57 @@ export const getUserQuizzesWithResults = async (userId) => {
     console.error('Error getting user quizzes with results:', error);
     return [];
   }
+};
+
+// Get quiz results from Firestore
+export const getQuizResultsFromFirestore = async (quizId) => {
+  try {
+    const quizRef = doc(db, 'quizzes', quizId);
+    const quizDoc = await getDoc(quizRef);
+    
+    if (quizDoc.exists()) {
+      const quizData = quizDoc.data();
+      const results = quizData.results || [];
+      
+      // Calculate winners based on score and time
+      const winners = calculateWinners(results);
+      
+      return {
+        quiz: {
+          title: quizData.title,
+          passage: quizData.passage,
+          questions: quizData.questions,
+          description: quizData.description
+        },
+        results: results,
+        winners: winners, // Add winners array
+        totalParticipants: quizData.totalParticipants || 0,
+        createdAt: quizData.createdAt,
+        lastUpdated: quizData.lastUpdated
+      };
+    } else {
+      console.log('No such quiz found!');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error getting quiz results:', error);
+    return null;
+  }
+};
+
+// Calculate winners based on score and time
+export const calculateWinners = (results) => {
+  if (!results || results.length === 0) return [];
+  
+  // Sort results by score (descending) and then by timestamp (ascending - earlier is better)
+  const sortedResults = [...results].sort((a, b) => {
+    // First compare by score
+    if (b.score !== a.score) {
+      return b.score - a.score;
+    }
+    // If scores are equal, compare by timestamp (earlier timestamp wins)
+    return new Date(a.timestamp) - new Date(b.timestamp);
+  });
+  
+  return sortedResults;
 };
