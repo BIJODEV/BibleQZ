@@ -98,15 +98,14 @@ export const listenToQuizResults = (quizId, callback) => {
     const unsubscribe = onSnapshot(quizRef, (doc) => {
       if (doc.exists()) {
         const quizData = doc.data();
-        const sortedResults = calculateWinners(quizData.results || []);
-        callback(sortedResults); // Send SORTED results
+        callback(quizData.results || []);
       }
     });
     
     return unsubscribe;
   } catch (error) {
     console.error('Error setting up real-time listener:', error);
-    return () => {};
+    return () => {}; // Return empty function as fallback
   }
 };
 
