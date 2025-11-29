@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getQuizResultsFromFirestore, calculateWinners } from '../utils/firebaseQuiz';
 
 const Results = () => {
   const [results, setResults] = useState(null);
-  const [allResults, setAllResults] = useState(null);
   const [error, setError] = useState('');
-  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   useEffect(() => {
     const hash = window.location.hash.substring(1);
@@ -14,9 +11,6 @@ const Results = () => {
         const jsonString = decodeURIComponent(escape(atob(hash)));
         const resultsData = JSON.parse(jsonString);
         setResults(resultsData);
-        
-        // Fetch all results to show leaderboard
-        fetchAllResults(resultsData.quizId);
       } catch (err) {
         setError('Invalid results link');
       }
@@ -24,17 +18,6 @@ const Results = () => {
       setError('No results data found');
     }
   }, []);
-
-  const fetchAllResults = async (quizId) => {
-    try {
-      const quizData = await getQuizResultsFromFirestore(quizId);
-      if (quizData) {
-        setAllResults(quizData);
-      }
-    } catch (err) {
-      console.error('Error fetching all results:', err);
-    }
-  };
 
   if (error) {
     return (
@@ -61,7 +44,6 @@ const Results = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        {/* Personal Results */}
         <div className="card text-center mb-8">
           <h1 className="text-3xl font-bold text-bible-blue mb-4">
             Quiz Results - {results.userName}
@@ -76,87 +58,14 @@ const Results = () => {
           <p className="mt-4 text-lg text-gray-600">
             {results.quizTitle} - {results.passage}
           </p>
-          
-          {/* Show leaderboard button if we have all results */}
-          {allResults && (
-            <button
-              onClick={() => setShowLeaderboard(!showLeaderboard)}
-              className="mt-4 bg-bible-blue text-white px-6 py-2 rounded-lg hover:bg-bible-purple transition-colors"
-            >
-              {showLeaderboard ? 'Hide Leaderboard' : 'Show Leaderboard'}
-            </button>
-          )}
         </div>
-
-        {/* Leaderboard Section */}
-        {showLeaderboard && allResults && (
-          <div className="card mb-8">
-            <h3 className="text-2xl font-bold text-bible-blue mb-6 text-center">
-              🏆 Leaderboard
-            </h3>
-            <div className="space-y-3">
-              {calculateWinners(allResults.results).map((result, index) => (
-                <div
-                  key={result.id}
-                  className={`flex items-center justify-between p-4 rounded-lg border-2 ${
-                    index === 0
-                      ? 'bg-yellow-50 border-yellow-300'
-                      : index === 1
-                      ? 'bg-gray-50 border-gray-300'
-                      : index === 2
-                      ? 'bg-orange-50 border-orange-300'
-                      : 'bg-white border-gray-200'
-                  } ${result.userName === results.userName ? 'ring-2 ring-bible-blue' : ''}`}
-                >
-                  <div className="flex items-center space-x-4">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
-                      index === 0
-                        ? 'bg-yellow-500 text-white'
-                        : index === 1
-                        ? 'bg-gray-500 text-white'
-                        : index === 2
-                        ? 'bg-orange-500 text-white'
-                        : 'bg-gray-300 text-gray-700'
-                    }`}>
-                      {index + 1}
-                    </div>
-                    <div>
-                      <span className="font-semibold">
-                        {result.userName}
-                        {result.userName === results.userName && ' (You)'}
-                      </span>
-                      {index === 0 && <span className="ml-2">👑</span>}
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-bold text-lg">{result.score}/{result.total}</div>
-                    <div className="text-sm text-gray-500">
-                      {new Date(result.timestamp).toLocaleTimeString()}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            {/* Winner Announcement */}
-            {allResults.results && allResults.results.length > 0 && (
-              <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg text-center">
-                <h4 className="font-bold text-green-800 text-lg mb-2">
-                  🎉 Congratulations!
-                </h4>
-                <p className="text-green-700">
-                  <strong>{calculateWinners(allResults.results)[0].userName}</strong> is the winner with {calculateWinners(allResults.results)[0].score} points!
-                </p>
-              </div>
-            )}
-          </div>
-        )}
 
         {/* Detailed Results */}
         <div className="card">
           <h3 className="text-2xl font-bold text-bible-blue mb-6">Detailed Answers</h3>
           <div className="space-y-6">
             {results.answers.map((answer, index) => {
+              // Use activeOptions if available (for new quizzes), otherwise use all options (for backward compatibility)
               const displayOptions = answer.activeOptions || answer.options;
               const optionLabels = ['A', 'B', 'C', 'D'];
               

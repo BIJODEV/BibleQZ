@@ -4,8 +4,23 @@ import { getStoredQuizResults, clearQuizResults } from '../../utils/quizEncoder'
 
 const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
   const [results, setResults] = useState([]);
+  const [sortedResults, setSortedResults] = useState([]);
   const [showExport, setShowExport] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // Function to sort results by score (descending) and time (ascending)
+  const sortResults = (resultsArray) => {
+    if (!resultsArray || resultsArray.length === 0) return [];
+    
+    return [...resultsArray].sort((a, b) => {
+      // First compare by score (higher score first)
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+      // If scores are equal, compare by timestamp (earlier submission first)
+      return new Date(a.timestamp) - new Date(b.timestamp);
+    });
+  };
 
   useEffect(() => {
     if (!quizId) return;
@@ -15,7 +30,9 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
       console.log('Setting up Firebase listener for quiz:', quizId);
       const unsubscribe = listenToQuizResults(quizId, (firebaseResults) => {
         console.log('Firebase results received:', firebaseResults);
+        const sorted = sortResults(firebaseResults || []);
         setResults(firebaseResults || []);
+        setSortedResults(sorted);
         setLoading(false);
       });
 
@@ -33,7 +50,9 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
 
   const loadResults = () => {
     const storedResults = getStoredQuizResults(quizId);
+    const sorted = sortResults(storedResults);
     setResults(storedResults);
+    setSortedResults(sorted);
     setLoading(false);
   };
 
@@ -46,24 +65,26 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
       } else {
         clearQuizResults(quizId);
         setResults([]);
+        setSortedResults([]);
       }
     }
   };
 
-  
   const exportToCSV = () => {
-    if (results.length === 0) return;
+    if (sortedResults.length === 0) return;
 
-    const headers = ['Name', 'Score', 'Total', 'Percentage', 'Date', 'Time Taken'];
+    const headers = ['Rank', 'Name', 'Score', 'Total', 'Percentage', 'Date', 'Time Taken', 'Completion Time'];
     const csvContent = [
       headers.join(','),
-      ...results.map(result => [
+      ...sortedResults.map((result, index) => [
+        index + 1,
         `"${result.userName.replace('"', '""')}"`,
         result.score,
         result.total,
         ((result.score / result.total) * 100).toFixed(1) + '%',
         new Date(result.timestamp).toLocaleDateString(),
-        result.timeTaken ? `${result.timeTaken}s` : 'N/A'
+        result.timeTaken ? `${result.timeTaken}s` : 'N/A',
+        new Date(result.timestamp).toLocaleTimeString()
       ].join(','))
     ].join('\n');
 
@@ -79,7 +100,11 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
   };
 
   const exportToJSON = () => {
-    const dataStr = JSON.stringify(results, null, 2);
+    const dataStr = JSON.stringify({
+      quizTitle,
+      exportedAt: new Date().toISOString(),
+      results: sortedResults
+    }, null, 2);
     const blob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -92,15 +117,15 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
   };
 
   const getAverageScore = () => {
-    if (results.length === 0) return 0;
-    const total = results.reduce((sum, result) => sum + result.score, 0);
-    return (total / results.length).toFixed(1);
+    if (sortedResults.length === 0) return 0;
+    const total = sortedResults.reduce((sum, result) => sum + result.score, 0);
+    return (total / sortedResults.length).toFixed(1);
   };
 
   const getScoreDistribution = () => {
     const distribution = { excellent: 0, good: 0, average: 0, poor: 0 };
     
-    results.forEach(result => {
+    sortedResults.forEach(result => {
       const percentage = (result.score / result.total) * 100;
       if (percentage >= 90) distribution.excellent++;
       else if (percentage >= 70) distribution.good++;
@@ -111,9 +136,19 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
     return distribution;
   };
 
+  const formatTimeTaken = (timestamp) => {
+    const start = new Date(timestamp);
+    const end = new Date();
+    const timeTaken = Math.round((end - start) / 1000); // Time in seconds
+    
+    const mins = Math.floor(timeTaken / 60);
+    const secs = timeTaken % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
   const distribution = getScoreDistribution();
 
- return (
+  return (
     <div className="card w-full max-w-6xl mx-auto p-4 sm:p-6">
       {/* Header & Actions */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-3 sm:gap-0">
@@ -158,22 +193,28 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
       )}
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 mb-6">
         <div className="bg-blue-50 p-3 sm:p-4 rounded-lg text-center">
-          <div className="text-lg sm:text-2xl font-bold text-blue-600">{results.length}</div>
+          <div className="text-lg sm:text-2xl font-bold text-blue-600">{sortedResults.length}</div>
           <div className="text-xs sm:text-sm text-blue-800">Participants</div>
         </div>
         <div className="bg-green-50 p-3 sm:p-4 rounded-lg text-center">
           <div className="text-lg sm:text-2xl font-bold text-green-600">{getAverageScore()}</div>
           <div className="text-xs sm:text-sm text-green-800">Average Score</div>
         </div>
+        <div className="bg-yellow-50 p-3 sm:p-4 rounded-lg text-center">
+          <div className="text-lg sm:text-2xl font-bold text-yellow-600">
+            {sortedResults.length > 0 ? sortedResults[0].userName : 'N/A'}
+          </div>
+          <div className="text-xs sm:text-sm text-yellow-800">Current Winner</div>
+        </div>
         <div className="bg-purple-50 p-3 sm:p-4 rounded-lg text-center">
           <div className="text-lg sm:text-2xl font-bold text-purple-600">{distribution.excellent}</div>
           <div className="text-xs sm:text-sm text-purple-800">Excellent (90%+)</div>
         </div>
-        <div className="bg-yellow-50 p-3 sm:p-4 rounded-lg text-center">
-          <div className="text-lg sm:text-2xl font-bold text-yellow-600">{distribution.poor}</div>
-          <div className="text-xs sm:text-sm text-yellow-800">Needs Help (&lt;50%)</div>
+        <div className="bg-red-50 p-3 sm:p-4 rounded-lg text-center">
+          <div className="text-lg sm:text-2xl font-bold text-red-600">{distribution.poor}</div>
+          <div className="text-xs sm:text-sm text-red-800">Needs Help (&lt;50%)</div>
         </div>
       </div>
 
@@ -184,14 +225,14 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
           <div className="flex flex-col sm:flex-row gap-2">
             <button
               onClick={exportToCSV}
-              disabled={results.length === 0}
+              disabled={sortedResults.length === 0}
               className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors w-full sm:w-auto"
             >
               📥 Export as CSV
             </button>
             <button
               onClick={exportToJSON}
-              disabled={results.length === 0}
+              disabled={sortedResults.length === 0}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-colors w-full sm:w-auto"
             >
               📥 Export as JSON
@@ -209,29 +250,58 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
       )}
 
       {/* Results Table */}
-      {!loading && results.length > 0 ? (
+      {!loading && sortedResults.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="w-full border-collapse border border-gray-200 text-sm sm:text-base">
             <thead>
               <tr className="bg-gray-50">
+                <th className="border border-gray-200 p-2 sm:p-3 text-center">Rank</th>
                 <th className="border border-gray-200 p-2 sm:p-3 text-left">Name</th>
                 <th className="border border-gray-200 p-2 sm:p-3 text-center">Score</th>
                 <th className="border border-gray-200 p-2 sm:p-3 text-center">%</th>
-                <th className="border border-gray-200 p-2 sm:p-3 text-center">Date</th>
-                <th className="border border-gray-200 p-2 sm:p-3 text-center">Time</th>
+                <th className="border border-gray-200 p-2 sm:p-3 text-center">Time Taken</th>
+                <th className="border border-gray-200 p-2 sm:p-3 text-center">Completed At</th>
               </tr>
             </thead>
             <tbody>
-              {results.map((r, i) => {
-                const pct = (r.score / r.total) * 100;
+              {sortedResults.map((result, index) => {
+                const pct = (result.score / result.total) * 100;
                 let color = pct >= 90 ? 'text-green-600' : pct >= 70 ? 'text-blue-600' : pct >= 50 ? 'text-yellow-600' : 'text-red-600';
                 return (
-                  <tr key={i} className="hover:bg-gray-50">
-                    <td className="border border-gray-200 p-2 sm:p-3 font-medium">{r.userName}</td>
-                    <td className={`border border-gray-200 p-2 sm:p-3 text-center ${color}`}>{r.score}/{r.total}</td>
-                    <td className={`border border-gray-200 p-2 sm:p-3 text-center ${color}`}>{pct.toFixed(1)}%</td>
-                    <td className="border border-gray-200 p-2 sm:p-3 text-center text-xs sm:text-sm">{new Date(r.timestamp).toLocaleDateString()}</td>
-                    <td className="border border-gray-200 p-2 sm:p-3 text-center text-xs sm:text-sm">{r.timeTaken ? `${r.timeTaken}s` : 'N/A'}</td>
+                  <tr 
+                    key={index} 
+                    className={`hover:bg-gray-50 ${
+                      index === 0 ? 'bg-yellow-50' : 
+                      index === 1 ? 'bg-gray-50' : 
+                      index === 2 ? 'bg-orange-50' : ''
+                    }`}
+                  >
+                    <td className="border border-gray-200 p-2 sm:p-3 text-center font-bold">
+                      <div className="flex items-center justify-center">
+                        <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs ${
+                          index === 0 ? 'bg-yellow-500 text-white' :
+                          index === 1 ? 'bg-gray-500 text-white' :
+                          index === 2 ? 'bg-orange-500 text-white' :
+                          'bg-gray-300 text-gray-700'
+                        }`}>
+                          {index + 1}
+                        </span>
+                        {index === 0 && <span className="ml-1">👑</span>}
+                      </div>
+                    </td>
+                    <td className="border border-gray-200 p-2 sm:p-3 font-medium">{result.userName}</td>
+                    <td className={`border border-gray-200 p-2 sm:p-3 text-center font-bold ${color}`}>
+                      {result.score}/{result.total}
+                    </td>
+                    <td className={`border border-gray-200 p-2 sm:p-3 text-center font-bold ${color}`}>
+                      {pct.toFixed(1)}%
+                    </td>
+                    <td className="border border-gray-200 p-2 sm:p-3 text-center text-xs sm:text-sm">
+                      {formatTimeTaken(result.timestamp)}
+                    </td>
+                    <td className="border border-gray-200 p-2 sm:p-3 text-center text-xs sm:text-sm">
+                      {new Date(result.timestamp).toLocaleTimeString()}
+                    </td>
                   </tr>
                 );
               })}
