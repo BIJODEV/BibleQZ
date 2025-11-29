@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getQuizResultsFromFirestore, calculateWinners } from '../firebase/firebaseQuiz';
+import { getQuizResultsFromFirestore, calculateWinners } from '../utils/firebaseQuiz';
 
 const Results = () => {
   const [results, setResults] = useState(null);
