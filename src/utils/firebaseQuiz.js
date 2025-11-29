@@ -47,6 +47,7 @@ export const getQuizFromFirestore = async (quizId) => {
 };
 
 // Submit results to Firestore
+// Submit results to Firestore with duplicate prevention
 export const submitQuizResults = async (quizId, result) => {
   try {
     const quizRef = doc(db, 'quizzes', quizId);
@@ -71,11 +72,12 @@ export const submitQuizResults = async (quizId, result) => {
       return true; // Return true to avoid showing error to user
     }
 
-    // Add result to the quiz's results array
+    // Add result to the quiz's results array with completion time
     await updateDoc(quizRef, {
       results: arrayUnion({
         ...result,
-        id: `${result.userName}_${Date.now()}` // Unique ID for each result
+        id: `${result.userName}_${Date.now()}`, // Unique ID for each result
+        completedAt: new Date() // Add completion timestamp
       }),
       totalParticipants: (quizData.totalParticipants || 0) + 1,
       lastUpdated: new Date()
