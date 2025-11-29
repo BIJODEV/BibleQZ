@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { listenToQuizResults } from '../../utils/firebaseQuiz';
-import { getStoredQuizResults, clearQuizResults } from '../../utils/quizEncoder'; // Keep for fallback
+import { getStoredQuizResults, clearQuizResults } from '../../utils/quizEncoder';
 
 const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
   const [results, setResults] = useState([]);
@@ -11,7 +11,6 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
     if (!quizId) return;
 
     if (isFirebase) {
-      // Firebase real-time listener
       console.log('Setting up Firebase listener for quiz:', quizId);
       const unsubscribe = listenToQuizResults(quizId, (firebaseResults) => {
         console.log('Firebase results received:', firebaseResults);
@@ -24,24 +23,63 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
         unsubscribe();
       };
     } else {
-      // Fallback to localStorage
+      // For localStorage, we need to sort manually
       loadResults();
       const interval = setInterval(loadResults, 10000);
       return () => clearInterval(interval);
     }
   }, [quizId, isFirebase]);
 
+  // Sorting function for localStorage results
+  const sortResults = (results) => {
+    if (!results || results.length === 0) return [];
+    
+    const resultsWithTime = results.map(result => ({
+      ...result,
+      timeTaken: result.timeTaken || 0,
+      percentage: ((result.score / result.total) * 100).toFixed(1)
+    }));
+    
+    // Sort by score (desc) then time (asc)
+    const sorted = [...resultsWithTime].sort((a, b) => {
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+      return a.timeTaken - b.timeTaken;
+    });
+    
+    // Add ranking
+    let currentRank = 1;
+    let skipCount = 0;
+    
+    return sorted.map((result, index) => {
+      if (index === 0) {
+        return { ...result, rank: 1 };
+      }
+      
+      const prevResult = sorted[index - 1];
+      
+      if (result.score === prevResult.score && result.timeTaken === prevResult.timeTaken) {
+        skipCount++;
+        return { ...result, rank: currentRank };
+      } else {
+        currentRank = currentRank + 1 + skipCount;
+        skipCount = 0;
+        return { ...result, rank: currentRank };
+      }
+    });
+  };
+
   const loadResults = () => {
     const storedResults = getStoredQuizResults(quizId);
-    setResults(storedResults);
+    const sortedResults = sortResults(storedResults);
+    setResults(sortedResults);
     setLoading(false);
   };
 
   const clearResults = async () => {
     if (window.confirm('Are you sure you want to clear all results? This cannot be undone.')) {
       if (isFirebase) {
-        // For Firebase, we can't easily clear from client-side
-        // You might want to implement a cloud function for this
         alert('To clear Firebase results, you need to delete them manually from the Firebase console for now.');
       } else {
         clearQuizResults(quizId);
@@ -50,14 +88,14 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
     }
   };
 
-  
   const exportToCSV = () => {
     if (results.length === 0) return;
 
-    const headers = ['Name', 'Score', 'Total', 'Percentage', 'Date', 'Time Taken'];
+    const headers = ['Rank', 'Name', 'Score', 'Total', 'Percentage', 'Date', 'Time Taken'];
     const csvContent = [
       headers.join(','),
       ...results.map(result => [
+        result.rank,
         `"${result.userName.replace('"', '""')}"`,
         result.score,
         result.total,
@@ -111,9 +149,33 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
     return distribution;
   };
 
-  const distribution = getScoreDistribution();
+  const getRankingBadge = (rank) => {
+    switch(rank) {
+      case 1: return '🥇';
+      case 2: return '🥈';
+      case 3: return '🥉';
+      default: return `#${rank}`;
+    }
+  };
 
- return (
+  const getRankingColor = (rank) => {
+    switch(rank) {
+      case 1: return 'bg-yellow-50 border-l-4 border-l-yellow-400';
+      case 2: return 'bg-gray-50 border-l-4 border-l-gray-400';
+      case 3: return 'bg-orange-50 border-l-4 border-l-orange-400';
+      default: return 'bg-white border-l-4 border-l-transparent';
+    }
+  };
+
+  const getTopPerformer = () => {
+    if (results.length === 0) return null;
+    return results[0];
+  };
+
+  const distribution = getScoreDistribution();
+  const topPerformer = getTopPerformer();
+
+  return (
     <div className="card w-full max-w-6xl mx-auto p-4 sm:p-6">
       {/* Header & Actions */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-3 sm:gap-0">
@@ -154,6 +216,27 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
             Results will appear automatically as participants submit their quizzes.
             {loading && ' (Connecting...)'}
           </p>
+        </div>
+      )}
+
+      {/* Top Performer Banner */}
+      {topPerformer && (
+        <div className="bg-gradient-to-r from-yellow-50 to-amber-50 border border-yellow-200 rounded-lg p-4 mb-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <span className="text-2xl">🥇</span>
+              <div>
+                <h3 className="font-bold text-yellow-800">Top Performer</h3>
+                <p className="text-yellow-700 text-sm">
+                  {topPerformer.userName} - {topPerformer.score}/{topPerformer.total} ({((topPerformer.score / topPerformer.total) * 100).toFixed(1)}%) in {topPerformer.timeTaken || 'N/A'}s
+                </p>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-xs text-yellow-600">Rank #1</p>
+              <p className="text-sm font-semibold text-yellow-700">Congratulations! 🎉</p>
+            </div>
+          </div>
         </div>
       )}
 
@@ -214,24 +297,46 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
           <table className="w-full border-collapse border border-gray-200 text-sm sm:text-base">
             <thead>
               <tr className="bg-gray-50">
+                <th className="border border-gray-200 p-2 sm:p-3 text-center w-16">Rank</th>
                 <th className="border border-gray-200 p-2 sm:p-3 text-left">Name</th>
                 <th className="border border-gray-200 p-2 sm:p-3 text-center">Score</th>
                 <th className="border border-gray-200 p-2 sm:p-3 text-center">%</th>
+                <th className="border border-gray-200 p-2 sm:p-3 text-center">Time Taken</th>
                 <th className="border border-gray-200 p-2 sm:p-3 text-center">Date</th>
-                <th className="border border-gray-200 p-2 sm:p-3 text-center">Time</th>
               </tr>
             </thead>
             <tbody>
-              {results.map((r, i) => {
-                const pct = (r.score / r.total) * 100;
-                let color = pct >= 90 ? 'text-green-600' : pct >= 70 ? 'text-blue-600' : pct >= 50 ? 'text-yellow-600' : 'text-red-600';
+              {results.map((result, index) => {
+                const percentage = (result.score / result.total) * 100;
+                let scoreColor = percentage >= 90 ? 'text-green-600' : 
+                               percentage >= 70 ? 'text-blue-600' : 
+                               percentage >= 50 ? 'text-yellow-600' : 'text-red-600';
+                
                 return (
-                  <tr key={i} className="hover:bg-gray-50">
-                    <td className="border border-gray-200 p-2 sm:p-3 font-medium">{r.userName}</td>
-                    <td className={`border border-gray-200 p-2 sm:p-3 text-center ${color}`}>{r.score}/{r.total}</td>
-                    <td className={`border border-gray-200 p-2 sm:p-3 text-center ${color}`}>{pct.toFixed(1)}%</td>
-                    <td className="border border-gray-200 p-2 sm:p-3 text-center text-xs sm:text-sm">{new Date(r.timestamp).toLocaleDateString()}</td>
-                    <td className="border border-gray-200 p-2 sm:p-3 text-center text-xs sm:text-sm">{r.timeTaken ? `${r.timeTaken}s` : 'N/A'}</td>
+                  <tr 
+                    key={index} 
+                    className={`hover:bg-gray-50 transition-colors ${getRankingColor(result.rank)}`}
+                  >
+                    <td className="border border-gray-200 p-2 sm:p-3 text-center font-bold">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white border-2 border-current text-sm">
+                        {getRankingBadge(result.rank)}
+                      </span>
+                    </td>
+                    <td className="border border-gray-200 p-2 sm:p-3 font-medium">
+                      {result.userName}
+                    </td>
+                    <td className={`border border-gray-200 p-2 sm:p-3 text-center font-semibold ${scoreColor}`}>
+                      {result.score}/{result.total}
+                    </td>
+                    <td className={`border border-gray-200 p-2 sm:p-3 text-center font-semibold ${scoreColor}`}>
+                      {percentage.toFixed(1)}%
+                    </td>
+                    <td className="border border-gray-200 p-2 sm:p-3 text-center text-xs sm:text-sm font-mono">
+                      {result.timeTaken ? `${result.timeTaken}s` : 'N/A'}
+                    </td>
+                    <td className="border border-gray-200 p-2 sm:p-3 text-center text-xs sm:text-sm">
+                      {new Date(result.timestamp).toLocaleDateString()}
+                    </td>
                   </tr>
                 );
               })}
@@ -260,5 +365,3 @@ const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
 };
 
 export default QuizResultsDashboard;
-
-

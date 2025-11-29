@@ -98,14 +98,15 @@ export const listenToQuizResults = (quizId, callback) => {
     const unsubscribe = onSnapshot(quizRef, (doc) => {
       if (doc.exists()) {
         const quizData = doc.data();
-        callback(quizData.results || []);
+        const sortedResults = calculateWinners(quizData.results || []);
+        callback(sortedResults); // Send SORTED results
       }
     });
     
     return unsubscribe;
   } catch (error) {
     console.error('Error setting up real-time listener:', error);
-    return () => {}; // Return empty function as fallback
+    return () => {};
   }
 };
 
@@ -168,36 +169,6 @@ export const getUserQuizHistory = async (userId) => {
     return [];
   }
 };
-
-// Get quiz results from Firestore
-// export const getQuizResultsFromFirestore = async (quizId) => {
-//   try {
-//     const quizRef = doc(db, 'quizzes', quizId);
-//     const quizDoc = await getDoc(quizRef);
-    
-//     if (quizDoc.exists()) {
-//       const quizData = quizDoc.data();
-//       return {
-//         quiz: {
-//           title: quizData.title,
-//           passage: quizData.passage,
-//           questions: quizData.questions,
-//           description: quizData.description
-//         },
-//         results: quizData.results || [],
-//         totalParticipants: quizData.totalParticipants || 0,
-//         createdAt: quizData.createdAt,
-//         lastUpdated: quizData.lastUpdated
-//       };
-//     } else {
-//       console.log('No such quiz found!');
-//       return null;
-//     }
-//   } catch (error) {
-//     console.error('Error getting quiz results:', error);
-//     return null;
-//   }
-// };
 
 // Get user's created quizzes with results
 export const getUserQuizzesWithResults = async (userId) => {
@@ -278,7 +249,8 @@ export const calculateWinners = (results) => {
     
     return {
       ...result,
-      timeTaken: timeTaken
+      timeTaken: timeTaken,
+      percentage: ((result.score / result.total) * 100).toFixed(1)
     };
   });
   
@@ -292,5 +264,28 @@ export const calculateWinners = (results) => {
     return a.timeTaken - b.timeTaken;
   });
   
-  return sortedResults;
+  // Add ranking (handle ties properly)
+  let currentRank = 1;
+  let previousScore = null;
+  let previousTime = null;
+  let skipCount = 0;
+  
+  return sortedResults.map((result, index) => {
+    if (index === 0) {
+      // First result is always rank 1
+      return { ...result, rank: 1 };
+    }
+    
+    const prevResult = sortedResults[index - 1];
+    
+    // If current result has same score AND same time as previous, same rank
+    if (result.score === prevResult.score && result.timeTaken === prevResult.timeTaken) {
+      skipCount++;
+      return { ...result, rank: currentRank };
+    } else {
+      currentRank = currentRank + 1 + skipCount;
+      skipCount = 0;
+      return { ...result, rank: currentRank };
+    }
+  });
 };
