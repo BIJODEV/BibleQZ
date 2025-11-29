@@ -73,12 +73,12 @@ const QuizCreatorResults = ({ quizId, quizTitle }) => {
             </div>
             <div className="text-sm text-gray-600">Current Winner</div>
           </div>
-          <div className="bg-purple-50 p-4 rounded-lg text-center">
+          {/* <div className="bg-purple-50 p-4 rounded-lg text-center">
             <div className="text-2xl font-bold text-bible-blue">
               {new Date(results.lastUpdated).toLocaleDateString()}
             </div>
             <div className="text-sm text-gray-600">Last Updated</div>
-          </div>
+          </div> */}
         </div>
       </div>
 
