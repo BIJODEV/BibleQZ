@@ -46,7 +46,7 @@ export const getQuizFromFirestore = async (quizId) => {
   }
 };
 
-// Submit results to Firestore
+// Submit results to Firestore with duplicate prevention
 export const submitQuizResults = async (quizId, result) => {
   try {
     const quizRef = doc(db, 'quizzes', quizId);
@@ -88,6 +88,7 @@ export const submitQuizResults = async (quizId, result) => {
     return false;
   }
 };
+
 
 // Listen for real-time results updates
 export const listenToQuizResults = (quizId, callback) => {
