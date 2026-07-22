@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { SmilePlus, Languages, Trophy, Target, Hourglass, PartyPopper } from 'lucide-react';
 import { emojiParables } from '../../../data/games/emojiParablesData';
 
 const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrentTeam }) => {
@@ -163,7 +164,7 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <div className="text-6xl mb-4">😇</div>
+          <SmilePlus className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
           <h1 className="text-4xl font-heading font-bold text-ink mb-4">Emoji Parables</h1>
           <p className="text-xl text-slate-body">Guess the Bible story from emojis!</p>
         </div>
@@ -173,7 +174,7 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
             onClick={() => selectLanguage('english')} 
             className="bg-blue-500 hover:bg-blue-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-105"
         >
-            <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3">🇺🇸</div>
+            <Languages className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 sm:mb-3 mx-auto" />
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3">English</h2>
             <p className="text-blue-100 text-xs sm:text-sm md:text-base">
               {emojiParables.english.length} parables
@@ -184,7 +185,7 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
             onClick={() => selectLanguage('malayalam')} 
             className="bg-green-500 hover:bg-green-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-105"
         >
-          <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3">🇮🇳</div>
+          <Languages className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 sm:mb-3 mx-auto" />
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3">Malayalam</h2>
           <p className="text-green-100 text-xs sm:text-sm md:text-base">
               {emojiParables.malayalam?.length || 0} parables
@@ -214,7 +215,7 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center">
-          <div className="text-6xl mb-4">🏆</div>
+          <Trophy className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
           <h2 className="text-3xl font-heading font-bold text-ink mb-6">Game Complete!</h2>
           
           {teamMode ? (
@@ -261,7 +262,7 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center">
-          <div className="text-6xl mb-4">⏳</div>
+          <Hourglass className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
           <h2 className="text-2xl font-heading font-bold text-ink mb-4">Loading...</h2>
         </div>
       </div>
@@ -297,7 +298,7 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
       {/* Correct Answer Feedback */}
       {showCorrect && (
         <div className="mb-6 bg-green-50 border-2 border-green-200 rounded-xl p-6 text-center">
-          <div className="text-4xl mb-2">🎉</div>
+          <PartyPopper className="w-9 h-9 mb-2 mx-auto text-green-600" />
           <h3 className="text-2xl font-bold text-green-800 mb-2">Correct!</h3>
           <p className="text-green-700 text-lg mb-2">
             +{Math.round(pointsEarned)} points!
@@ -320,12 +321,15 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
             ? 'bg-blue-500 text-white' 
             : 'bg-red-500 text-white'
         }`}>
-          {currentTeam === 'teamA' ? "🎯 TEAM A - YOUR TURN" : "🎯 TEAM B - YOUR TURN"}
+          <span className="inline-flex items-center gap-2">
+            <Target className="w-4 h-4" />
+            {currentTeam === 'teamA' ? "TEAM A - YOUR TURN" : "TEAM B - YOUR TURN"}
+          </span>
         </div>
       )}
 
       <div className="text-center mb-8">
-        <div className="text-6xl mb-4">😇</div>
+        <SmilePlus className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
         <h2 className="text-3xl font-heading font-bold text-ink mb-2">Emoji Parables</h2>
         <p className="text-slate-body mb-6">
           Guess the Bible story from the emojis

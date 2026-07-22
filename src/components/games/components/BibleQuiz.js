@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Globe, Languages, BookOpen, Star, Mountain, Church, ClipboardList, PartyPopper, Trophy, Target, CheckCircle2, Lightbulb } from 'lucide-react';
 import { bibleQuestions as generalEnglishQuestions } from '../../../data/games/BibleQuizData';
 import { bibleQuestions as malayalamQuestions } from '../../../data/games/BibleQuizDataMalayalam';
 import { oldTestamentQuestions } from '../../../data/games/OldTestamentData';
@@ -200,7 +201,7 @@ const BibleQuiz = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrentT
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
         <div className="text-center mb-6 sm:mb-8">
-          <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">🌍</div>
+          <Globe className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-3 sm:mb-4 mx-auto text-brand-blue" />
           <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-2 sm:mb-4">
             Select Language
           </h1>
@@ -214,7 +215,7 @@ const BibleQuiz = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrentT
             onClick={() => selectLanguage('english')}
             className="bg-blue-500 hover:bg-blue-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-105"
           >
-            <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3">🇺🇸</div>
+            <Languages className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 sm:mb-3 mx-auto" />
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3">English</h2>
             <p className="text-blue-100 text-xs sm:text-sm md:text-base">
               {questionCounts.total} questions available
@@ -225,7 +226,7 @@ const BibleQuiz = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrentT
             onClick={() => selectLanguage('malayalam')}
             className="bg-green-500 hover:bg-green-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-105"
           >
-            <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3">🇮🇳</div>
+            <Languages className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 sm:mb-3 mx-auto" />
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3">Malayalam</h2>
             <p className="text-green-100 text-xs sm:text-sm md:text-base">
               {malayalamQuestions.length} questions available
@@ -249,7 +250,7 @@ if (gamePhase === 'testament') {
   return (
     <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-5 md:p-6 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
       <div className="text-center mb-4 sm:mb-6">
-        <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3">📖</div>
+        <BookOpen className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 mb-2 sm:mb-3 mx-auto text-brand-blue" />
         <h1 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-ink mb-2">
           Select Quiz Type
         </h1>
@@ -266,7 +267,7 @@ if (gamePhase === 'testament') {
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 sm:space-x-4">
-              <div className="text-2xl sm:text-3xl">🌟</div>
+              <Star className="w-6 h-6 sm:w-7 sm:h-7" />
               <div className="text-left">
                 <h2 className="text-base sm:text-lg font-bold">General Quiz</h2>
                 <p className="text-purple-100 text-xs sm:text-sm">
@@ -285,7 +286,7 @@ if (gamePhase === 'testament') {
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 sm:space-x-4">
-              <div className="text-2xl sm:text-3xl">⛰️</div>
+              <Mountain className="w-6 h-6 sm:w-7 sm:h-7" />
               <div className="text-left">
                 <h2 className="text-base sm:text-lg font-bold">Old Testament</h2>
                 <p className="text-orange-100 text-xs sm:text-sm">
@@ -304,7 +305,7 @@ if (gamePhase === 'testament') {
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 sm:space-x-4">
-              <div className="text-2xl sm:text-3xl">✝️</div>
+              <Church className="w-6 h-6 sm:w-7 sm:h-7" />
               <div className="text-left">
                 <h2 className="text-base sm:text-lg font-bold">New Testament</h2>
                 <p className="text-blue-100 text-xs sm:text-sm">
@@ -344,7 +345,7 @@ if (gamePhase === 'book') {
   return (
     <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-5 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
       <div className="text-center mb-4 sm:mb-5">
-        <div className="text-3xl sm:text-4xl mb-2">📚</div>
+        <BookOpen className="w-8 h-8 sm:w-9 sm:h-9 mb-2 mx-auto text-brand-blue" />
         <h1 className="text-lg sm:text-xl font-heading font-bold text-ink mb-1">
           {testamentName}
         </h1>
@@ -427,7 +428,7 @@ if (gamePhase === 'book') {
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-md sm:max-w-xl mx-3 sm:mx-auto my-2 sm:my-4">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
-          <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">📝</div>
+          <ClipboardList className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-3 sm:mb-4 mx-auto text-brand-blue" />
           <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-3 sm:mb-4">
             Quiz Setup
           </h1>
@@ -515,7 +516,7 @@ if (gamePhase === 'book') {
     return (
         <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-2xl mx-4 sm:mx-6 md:mx-auto my-4 sm:my-6">
         <div className="text-center">
-            <div className="text-4xl sm:text-5xl md:text-6xl mb-4">🎉</div>
+            <PartyPopper className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-4 mx-auto text-brand-blue" />
             <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-4">
             {language === 'english' ? 'English' : 'Malayalam'} Quiz Complete!
             </h2>
@@ -536,12 +537,12 @@ if (gamePhase === 'book') {
                     </p>
                 </div>
                 </div>
-                <p className="text-base sm:text-lg text-slate-body">
-                {teams.teamA === teams.teamB 
-                    ? "It's a tie! 🎉" 
-                    : teams.teamA > teams.teamB 
-                    ? "Team A wins! 🏆" 
-                    : "Team B wins! 🏆"
+                <p className="text-base sm:text-lg text-slate-body flex items-center justify-center gap-2">
+                {teams.teamA === teams.teamB
+                    ? <>It's a tie! <PartyPopper className="w-5 h-5" /></>
+                    : teams.teamA > teams.teamB
+                    ? <>Team A wins! <Trophy className="w-5 h-5" /></>
+                    : <>Team B wins! <Trophy className="w-5 h-5" /></>
                 }
                 </p>
             </div>
@@ -614,8 +615,9 @@ if (gamePhase === 'book') {
           ? 'bg-blue-500 text-white' 
           : 'bg-red-500 text-white'
       }`}>
-        <div className="text-sm sm:text-base">
-          {currentQuestionTeam === 'teamA' ? "🎯 TEAM A" : "🎯 TEAM B"}
+        <div className="text-sm sm:text-base flex items-center justify-center gap-2">
+          <Target className="w-4 h-4 sm:w-5 sm:h-5" />
+          {currentQuestionTeam === 'teamA' ? "TEAM A" : "TEAM B"}
         </div>
         <div className="text-xs font-normal mt-1">
           Question {currentQuestionIndex + 1} is for {currentQuestionTeam === 'teamA' ? 'Team A' : 'Team B'}
@@ -670,10 +672,10 @@ if (gamePhase === 'book') {
             ? 'bg-green-50 border-green-200' 
             : 'bg-blue-50 border-blue-200'
         }`}>
-          <h3 className="font-bold text-base sm:text-lg mb-2">
-            {selectedAnswer === currentQuestion.correct 
-              ? '✅ Correct!' 
-              : '💡 Explanation'}
+          <h3 className="font-bold text-base sm:text-lg mb-2 flex items-center gap-2">
+            {selectedAnswer === currentQuestion.correct
+              ? <><CheckCircle2 className="w-5 h-5 text-green-600" /> Correct!</>
+              : <><Lightbulb className="w-5 h-5 text-blue-600" /> Explanation</>}
           </h3>
           <p className="text-gray-700 text-sm sm:text-base">
             {currentQuestion.explanation}

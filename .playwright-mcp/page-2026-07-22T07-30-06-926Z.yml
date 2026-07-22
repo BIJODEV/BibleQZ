@@ -1,0 +1,125 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e6]:
+      - link [ref=e7] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e13]:
+          - heading "BibleQ" [level=1] [ref=e14]
+          - paragraph [ref=e15]: Meditate • Learn • Grow
+      - navigation [ref=e16]:
+        - link "Home" [ref=e17] [cursor=pointer]:
+          - /url: /
+        - link "Create Quiz" [ref=e18] [cursor=pointer]:
+          - /url: /create
+        - link "Games" [ref=e19] [cursor=pointer]:
+          - /url: /games
+        - link "Contact" [ref=e20] [cursor=pointer]:
+          - /url: /contact
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - generic [ref=e24]:
+        - heading "Welcome to BibleQ" [level=1] [ref=e30]
+        - paragraph [ref=e31]: Create Bible quizzes, track results live, and deepen Scripture understanding.
+        - generic [ref=e32]:
+          - link "Get Started Free" [ref=e33] [cursor=pointer]:
+            - /url: /create
+          - link "Games" [ref=e34] [cursor=pointer]:
+            - /url: /games
+      - generic [ref=e39]:
+        - heading "Everything for Bible Study" [level=2] [ref=e40]
+        - paragraph [ref=e41]: For pastors and group leaders
+        - generic [ref=e42]:
+          - generic [ref=e43]:
+            - heading "Create Quizzes" [level=3] [ref=e48]
+            - paragraph [ref=e49]: Create customized Bible quizzes with multiple question types.
+          - generic [ref=e50]:
+            - heading "Easy Sharing" [level=3] [ref=e58]
+            - paragraph [ref=e59]: Share instantly. No accounts needed for participants.
+          - generic [ref=e60]:
+            - heading "Live Results" [level=3] [ref=e64]
+            - paragraph [ref=e65]: Track responses and scores in real-time.
+          - generic [ref=e66]:
+            - heading "Results History" [level=3] [ref=e72]
+            - paragraph [ref=e73]: Access all quiz results anytime.
+      - generic [ref=e75]:
+        - heading "Simple 3-Step Process" [level=2] [ref=e76]
+        - generic [ref=e77]:
+          - generic [ref=e78]:
+            - generic [ref=e79]: "1"
+            - heading "Create" [level=3] [ref=e80]
+            - paragraph [ref=e81]: Build quiz with intuitive editor
+          - generic [ref=e82]:
+            - generic [ref=e83]: "2"
+            - heading "Share" [level=3] [ref=e84]
+            - paragraph [ref=e85]: Share link with your group
+          - generic [ref=e86]:
+            - generic [ref=e87]: "3"
+            - heading "Analyze" [level=3] [ref=e88]
+            - paragraph [ref=e89]: View live results & insights
+      - generic [ref=e91]:
+        - heading "For Every Ministry" [level=2] [ref=e92]
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - heading "Sunday Sermons" [level=3] [ref=e99]
+            - paragraph [ref=e100]: Reinforce key points from your message
+          - generic [ref=e101]:
+            - heading "Small Groups" [level=3] [ref=e107]
+            - paragraph [ref=e108]: Engage every member with interactive study
+          - generic [ref=e109]:
+            - heading "Bible Studies" [level=3] [ref=e112]
+            - paragraph [ref=e113]: Test understanding and spark discussion
+          - generic [ref=e114]:
+            - heading "Sunday School" [level=3] [ref=e118]
+            - paragraph [ref=e119]: Make learning fun for all ages
+          - generic [ref=e120]:
+            - heading "Youth Ministry" [level=3] [ref=e123]
+            - paragraph [ref=e124]: Connect with youth through interactive content
+          - generic [ref=e125]:
+            - heading "Online Church" [level=3] [ref=e129]
+            - paragraph [ref=e130]: Perfect for virtual services and groups
+      - generic [ref=e132]:
+        - generic [ref=e133]:
+          - heading "Bible Games" [level=2] [ref=e137]
+          - paragraph [ref=e138]: Interactive challenges to test your Scripture knowledge
+        - generic [ref=e139]:
+          - generic [ref=e140]:
+            - heading "Bible Challenges" [level=3] [ref=e141]
+            - paragraph [ref=e142]: Multiple choice quizzes, memorization games, and character challenges for personal or group use.
+            - generic [ref=e143]:
+              - generic [ref=e144]: Multiple choice
+              - generic [ref=e148]: Scripture games
+              - generic [ref=e152]: Bible characters
+              - generic [ref=e156]: Book recognition
+            - link "Play Games" [ref=e160] [cursor=pointer]:
+              - /url: /games
+          - generic [ref=e164]:
+            - img "Bible Games Preview" [ref=e166]
+            - heading "Bible Games" [level=4] [ref=e167]
+            - paragraph [ref=e168]: Feedback • Tracking • Levels
+            - generic [ref=e169]:
+              - img "Stats" [ref=e170]
+              - img "Timed" [ref=e172]
+              - img "Rewards" [ref=e175]
+              - img "Stars" [ref=e181]
+      - generic [ref=e183]:
+        - heading "Start Creating Bible Quizzes" [level=2] [ref=e184]
+        - paragraph [ref=e185]: Join leaders transforming Bible teaching with interactive quizzes.
+        - generic [ref=e186]:
+          - link "Create First Quiz" [ref=e187] [cursor=pointer]:
+            - /url: /create
+          - link "Explore Games" [ref=e188] [cursor=pointer]:
+            - /url: /games
+  - contentinfo [ref=e189]:
+    - generic [ref=e191]:
+      - generic [ref=e198]:
+        - heading "BibleQ" [level=3] [ref=e199]
+        - paragraph [ref=e200]: © 2026 Helping groups grow in Scripture
+      - generic [ref=e201]:
+        - link "Home" [ref=e202] [cursor=pointer]:
+          - /url: /
+        - link "Create Quiz" [ref=e203] [cursor=pointer]:
+          - /url: /create
+        - link "Games" [ref=e204] [cursor=pointer]:
+          - /url: /games
+        - link "Contact" [ref=e205] [cursor=pointer]:
+          - /url: /contact

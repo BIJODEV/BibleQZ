@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Library, BookOpen, Languages, Landmark, Church, Trophy, PartyPopper } from 'lucide-react';
 import { bibleBooks, bibleBooksMalayalam } from '../../../data/games/bibleBooksData';
 
 const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrentTeam }) => {
@@ -99,18 +100,18 @@ const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCur
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
         <div className="text-center mb-6 sm:mb-8">
-          <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">📚</div>
+          <Library className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-3 sm:mb-4 mx-auto text-brand-blue" />
           <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-3 sm:mb-4">Bible Book Order</h1>
           <p className="text-sm sm:text-base md:text-lg text-slate-body">Arrange Bible books in correct order</p>
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
           <button onClick={() => selectLanguage('english')} className="bg-blue-500 hover:bg-blue-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300">
-            <div className="text-2xl sm:text-3xl md:text-4xl mb-2">🇺🇸</div>
+            <Languages className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 mx-auto" />
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">English</h2>
           </button>
           <button onClick={() => selectLanguage('malayalam')} className="bg-green-500 hover:bg-green-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300">
-            <div className="text-2xl sm:text-3xl md:text-4xl mb-2">🇮🇳</div>
+            <Languages className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 mx-auto" />
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">Malayalam</h2>
           </button>
         </div>
@@ -127,19 +128,19 @@ const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCur
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
         <div className="text-center mb-6 sm:mb-8">
-          <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">📖</div>
+          <BookOpen className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-3 sm:mb-4 mx-auto text-brand-blue" />
           <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-3 sm:mb-4">Select Testament</h1>
           <p className="text-sm sm:text-base md:text-lg text-slate-body">Choose which testament to practice</p>
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
           <button onClick={() => selectTestament('oldTestament')} className="bg-orange-500 hover:bg-orange-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300">
-            <div className="text-2xl sm:text-3xl md:text-4xl mb-2">🕍</div>
+            <Landmark className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 mx-auto" />
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">Old Testament</h2>
             <p className="text-orange-100 text-xs sm:text-sm md:text-base">39 Books</p>
           </button>
           <button onClick={() => selectTestament('newTestament')} className="bg-purple-500 hover:bg-purple-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300">
-            <div className="text-2xl sm:text-3xl md:text-4xl mb-2">⛪</div>
+            <Church className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 mx-auto" />
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">New Testament</h2>
             <p className="text-purple-100 text-xs sm:text-sm md:text-base">27 Books</p>
           </button>
@@ -157,7 +158,7 @@ const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCur
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
         <div className="text-center">
-          <div className="text-4xl sm:text-5xl md:text-6xl mb-4">🏆</div>
+          <Trophy className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-4 mx-auto text-brand-blue" />
           <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-6">Game Complete!</h2>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-6">
             Final Score: <span className="font-bold text-blue-600">{teamMode ? teams[currentTeam] : score}</span>
@@ -196,7 +197,7 @@ const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCur
       {/* Correct Answer Feedback */}
       {showCorrect && (
         <div className="mb-6 bg-green-50 border-2 border-green-200 rounded-lg sm:rounded-xl p-4 sm:p-6 text-center">
-          <div className="text-3xl sm:text-4xl mb-2">🎉</div>
+          <PartyPopper className="w-8 h-8 sm:w-9 sm:h-9 mb-2 mx-auto text-green-600" />
           <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-green-800 mb-2">Perfect Order!</h3>
           <p className="text-green-700 text-sm sm:text-base">
             +{pointsEarned} points! Moving to next round...

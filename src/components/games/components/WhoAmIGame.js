@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Globe, Languages, UserSquare2, Trophy, PartyPopper, Target, Hourglass } from 'lucide-react';
 import { bibleCharacters as englishCharacters } from '../../../data/games/WhoAmIData';
 import { bibleCharacters as malayalamCharacters } from '../../../data/games/WhoAmIDataMalayalam';
 
@@ -166,7 +167,7 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <div className="text-6xl mb-4">🌍</div>
+          <Globe className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
           <h1 className="text-4xl font-heading font-bold text-ink mb-4">Select Language</h1>
           <p className="text-xl text-slate-body">Choose your preferred language for the game</p>
         </div>
@@ -176,7 +177,7 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
             onClick={() => selectLanguage('english')}
             className="bg-blue-500 hover:bg-blue-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-105"
         >
-          <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3">🇺🇸</div>
+          <Languages className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 sm:mb-3 mx-auto" />
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3">English</h2>
             <p className="text-blue-100 text-xs sm:text-sm md:text-base">
               {englishCharacters.length} characters available
@@ -187,7 +188,7 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
             onClick={() => selectLanguage('malayalam')}
             className="bg-green-500 hover:bg-green-600 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-105"
         >
-          <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3">🇮🇳</div>
+          <Languages className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 mb-2 sm:mb-3 mx-auto" />
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3">Malayalam</h2>
           <p className="text-green-100 text-xs sm:text-sm md:text-base">
               {malayalamCharacters.length} characters available
@@ -212,7 +213,7 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <div className="text-6xl mb-4">🎯</div>
+          <Target className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
           <h1 className="text-4xl font-heading font-bold text-ink mb-4">Game Setup</h1>
           <p className="text-xl text-slate-body">Choose how many characters to guess</p>
         </div>
@@ -285,7 +286,7 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center">
-          <div className="text-6xl mb-4">🏆</div>
+          <Trophy className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
           <h2 className="text-3xl font-heading font-bold text-ink mb-6">
             Game Complete!
           </h2>
@@ -306,10 +307,10 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
                 </div>
               </div>
               {teams.teamA === teams.teamB ? (
-                <p className="text-xl text-slate-body">It's a tie! 🎉</p>
+                <p className="text-xl text-slate-body flex items-center justify-center gap-2">It's a tie! <PartyPopper className="w-5 h-5" /></p>
               ) : (
-                <p className="text-xl text-slate-body">
-                  {teams.teamA > teams.teamB ? 'Team A' : 'Team B'} wins! 🎉
+                <p className="text-xl text-slate-body flex items-center justify-center gap-2">
+                  {teams.teamA > teams.teamB ? 'Team A' : 'Team B'} wins! <PartyPopper className="w-5 h-5" />
                 </p>
               )}
             </div>
@@ -344,7 +345,7 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center">
-          <div className="text-6xl mb-4">⏳</div>
+          <Hourglass className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
           <h2 className="text-2xl font-heading font-bold text-ink mb-4">Loading...</h2>
         </div>
       </div>
@@ -401,7 +402,10 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
             ? 'bg-blue-500 text-white' 
             : 'bg-red-500 text-white'
         }`}>
-          {currentTeam === 'teamA' ? "🎯 TEAM A - YOUR TURN" : "🎯 TEAM B - YOUR TURN"}
+          <span className="inline-flex items-center gap-2">
+            <Target className="w-4 h-4" />
+            {currentTeam === 'teamA' ? "TEAM A - YOUR TURN" : "TEAM B - YOUR TURN"}
+          </span>
           <div className="text-sm font-normal mt-1">
             Character {charactersPlayed + 1} of {totalCharacters}
           </div>
@@ -409,7 +413,7 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
       )}
 
       <div className="text-center mb-8">
-        <div className="text-6xl mb-4">🤔</div>
+        <UserSquare2 className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
         <h2 className="text-3xl font-heading font-bold text-ink mb-2">Who Am I?</h2>
         
         {/* Progress indicator */}
@@ -490,7 +494,7 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
       {showAnswer && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-8 max-w-md text-center">
-            <div className="text-6xl mb-4">🎯</div>
+            <Target className="w-14 h-14 mb-4 mx-auto text-brand-blue" />
             <h3 className="text-2xl font-heading font-bold text-ink mb-2">It was...</h3>
             <p className="text-4xl font-bold text-blue-600 mb-4">{currentCharacter.name}</p>
             <p className="text-slate-body mb-2">Fun fact:</p>

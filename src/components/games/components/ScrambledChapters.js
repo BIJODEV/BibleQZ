@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AlarmClock } from 'lucide-react';
 import { bibleBooks, bibleBooks2 } from '../../../data/games/scrambledData'
 
 const ScrambledChapters = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrentTeam }) => {
@@ -125,7 +126,7 @@ const ScrambledChapters = ({ onBack, teamMode, teams, setTeams, currentTeam, set
     return (
       <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
         <div className="text-center">
-          <div className="text-4xl sm:text-5xl md:text-6xl mb-4">⏰</div>
+          <AlarmClock className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-4 mx-auto text-brand-blue" />
           <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-4">Game Complete!</h2>
           
           {teamMode ? (
