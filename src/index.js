@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { mountApp } from './rootRender';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+mountApp(
+  document.getElementById('root'),
   <React.StrictMode>
     <App />
   </React.StrictMode>
