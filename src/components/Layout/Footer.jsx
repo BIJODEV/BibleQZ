@@ -16,7 +16,7 @@ const Footer = () => {
             <div>
               <h3 className="text-xl font-bold">BibleQ</h3>
               <p className="text-blue-200 text-sm">
-                &copy; {currentYear} Helping groups grow in Scripture
+                {`© ${currentYear} Helping groups grow in Scripture`}
               </p>
             </div>
           </div>
