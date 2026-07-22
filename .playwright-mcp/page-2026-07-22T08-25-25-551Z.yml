@@ -1,0 +1,141 @@
+- generic [ref=f3e3]:
+  - banner [ref=f3e4]:
+    - generic [ref=f3e6]:
+      - link [ref=f3e7] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f3e13]:
+          - heading "BibleQ" [level=1] [ref=f3e14]
+          - paragraph [ref=f3e15]: Meditate • Learn • Grow
+      - navigation [ref=f3e16]:
+        - link "Home" [ref=f3e17] [cursor=pointer]:
+          - /url: /
+        - link "Create Quiz" [ref=f3e18] [cursor=pointer]:
+          - /url: /create
+        - link "Games" [ref=f3e19] [cursor=pointer]:
+          - /url: /games
+        - link "Contact" [ref=f3e20] [cursor=pointer]:
+          - /url: /contact
+        - link "Know Your Church" [ref=f3e21] [cursor=pointer]:
+          - /url: https://knowurchurch.com
+  - main [ref=f3e26]:
+    - generic [ref=f3e27]:
+      - generic [ref=f3e29]:
+        - heading "Welcome to BibleQ" [level=1] [ref=f3e35]
+        - paragraph [ref=f3e36]: Create Bible quizzes, track results live, and deepen Scripture understanding.
+        - generic [ref=f3e37]:
+          - link "Get Started Free" [ref=f3e38] [cursor=pointer]:
+            - /url: /create
+          - link "Games" [ref=f3e39] [cursor=pointer]:
+            - /url: /games
+      - generic [ref=f3e44]:
+        - heading "Everything for Bible Study" [level=2] [ref=f3e45]
+        - paragraph [ref=f3e46]: For pastors and group leaders
+        - generic [ref=f3e47]:
+          - generic [ref=f3e48]:
+            - heading "Create Quizzes" [level=3] [ref=f3e53]
+            - paragraph [ref=f3e54]: Create customized Bible quizzes with multiple question types.
+          - generic [ref=f3e55]:
+            - heading "Easy Sharing" [level=3] [ref=f3e63]
+            - paragraph [ref=f3e64]: Share instantly. No accounts needed for participants.
+          - generic [ref=f3e65]:
+            - heading "Live Results" [level=3] [ref=f3e69]
+            - paragraph [ref=f3e70]: Track responses and scores in real-time.
+          - generic [ref=f3e71]:
+            - heading "Results History" [level=3] [ref=f3e77]
+            - paragraph [ref=f3e78]: Access all quiz results anytime.
+      - generic [ref=f3e80]:
+        - heading "Simple 3-Step Process" [level=2] [ref=f3e81]
+        - generic [ref=f3e82]:
+          - generic [ref=f3e83]:
+            - generic [ref=f3e84]: "1"
+            - heading "Create" [level=3] [ref=f3e85]
+            - paragraph [ref=f3e86]: Build quiz with intuitive editor
+          - generic [ref=f3e87]:
+            - generic [ref=f3e88]: "2"
+            - heading "Share" [level=3] [ref=f3e89]
+            - paragraph [ref=f3e90]: Share link with your group
+          - generic [ref=f3e91]:
+            - generic [ref=f3e92]: "3"
+            - heading "Analyze" [level=3] [ref=f3e93]
+            - paragraph [ref=f3e94]: View live results & insights
+      - generic [ref=f3e96]:
+        - heading "For Every Ministry" [level=2] [ref=f3e97]
+        - generic [ref=f3e98]:
+          - generic [ref=f3e99]:
+            - heading "Sunday Sermons" [level=3] [ref=f3e104]
+            - paragraph [ref=f3e105]: Reinforce key points from your message
+          - generic [ref=f3e106]:
+            - heading "Small Groups" [level=3] [ref=f3e112]
+            - paragraph [ref=f3e113]: Engage every member with interactive study
+          - generic [ref=f3e114]:
+            - heading "Bible Studies" [level=3] [ref=f3e117]
+            - paragraph [ref=f3e118]: Test understanding and spark discussion
+          - generic [ref=f3e119]:
+            - heading "Sunday School" [level=3] [ref=f3e123]
+            - paragraph [ref=f3e124]: Make learning fun for all ages
+          - generic [ref=f3e125]:
+            - heading "Youth Ministry" [level=3] [ref=f3e128]
+            - paragraph [ref=f3e129]: Connect with youth through interactive content
+          - generic [ref=f3e130]:
+            - heading "Online Church" [level=3] [ref=f3e134]
+            - paragraph [ref=f3e135]: Perfect for virtual services and groups
+      - generic [ref=f3e137]:
+        - generic [ref=f3e138]:
+          - heading "Bible Games" [level=2] [ref=f3e142]
+          - paragraph [ref=f3e143]: Interactive challenges to test your Scripture knowledge
+        - generic [ref=f3e144]:
+          - generic [ref=f3e145]:
+            - heading "Bible Challenges" [level=3] [ref=f3e146]
+            - paragraph [ref=f3e147]: Multiple choice quizzes, memorization games, and character challenges for personal or group use.
+            - generic [ref=f3e148]:
+              - generic [ref=f3e149]: Multiple choice
+              - generic [ref=f3e153]: Scripture games
+              - generic [ref=f3e157]: Bible characters
+              - generic [ref=f3e161]: Book recognition
+            - link "Play Games" [ref=f3e165] [cursor=pointer]:
+              - /url: /games
+          - generic [ref=f3e169]:
+            - img "Bible Games Preview" [ref=f3e171]
+            - heading "Bible Games" [level=4] [ref=f3e172]
+            - paragraph [ref=f3e173]: Feedback • Tracking • Levels
+            - generic [ref=f3e174]:
+              - img "Stats" [ref=f3e175]
+              - img "Timed" [ref=f3e177]
+              - img "Rewards" [ref=f3e180]
+              - img "Stars" [ref=f3e186]
+      - generic [ref=f3e190]:
+        - generic [ref=f3e191]:
+          - heading "Your Whole Church, Not Just Sunday School" [level=2] [ref=f3e192]
+          - paragraph [ref=f3e193]: Sunday School classes and attendance, a members & committee directory, trip planning, and a volunteer duty roster — all under one church code.
+        - generic [ref=f3e194]:
+          - generic [ref=f3e195]: Sunday School
+          - generic [ref=f3e199]: Members & Committee
+          - generic [ref=f3e206]: Trips & Outings
+          - generic [ref=f3e211]: Volunteers & Duty Roster
+        - paragraph [ref=f3e216]: Attendance, this week's memory verse, and any homework — one link, shared in the class WhatsApp group. No app to download, no account to create.
+        - generic [ref=f3e217]:
+          - link "Start free trial" [ref=f3e218] [cursor=pointer]:
+            - /url: https://knowurchurch.com
+          - paragraph [ref=f3e221]: No credit card required • Cancel anytime
+      - generic [ref=f3e222]:
+        - heading "Start Creating Bible Quizzes" [level=2] [ref=f3e223]
+        - paragraph [ref=f3e224]: Join leaders transforming Bible teaching with interactive quizzes.
+        - generic [ref=f3e225]:
+          - link "Create First Quiz" [ref=f3e226] [cursor=pointer]:
+            - /url: /create
+          - link "Explore Games" [ref=f3e227] [cursor=pointer]:
+            - /url: /games
+  - contentinfo [ref=f3e228]:
+    - generic [ref=f3e230]:
+      - generic [ref=f3e237]:
+        - heading "BibleQ" [level=3] [ref=f3e238]
+        - paragraph [ref=f3e239]: © 2026 Helping groups grow in Scripture
+      - generic [ref=f3e240]:
+        - link "Home" [ref=f3e241] [cursor=pointer]:
+          - /url: /
+        - link "Create Quiz" [ref=f3e242] [cursor=pointer]:
+          - /url: /create
+        - link "Games" [ref=f3e243] [cursor=pointer]:
+          - /url: /games
+        - link "Contact" [ref=f3e244] [cursor=pointer]:
+          - /url: /contact

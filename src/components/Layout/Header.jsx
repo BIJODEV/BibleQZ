@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Church, Menu, X } from 'lucide-react';
+import { Church, Menu, X, ExternalLink } from 'lucide-react';
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -37,6 +37,15 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+            <a
+              href="https://knowurchurch.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 bg-[#C9A15A] text-[#141F38] px-3 py-1.5 rounded-full text-sm font-semibold hover:bg-[#D4AC66] transition-colors"
+            >
+              Know Your Church
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -62,6 +71,16 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+            <a
+              href="https://knowurchurch.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMenuOpen(false)}
+              className="inline-flex items-center gap-1 bg-[#C9A15A] text-[#141F38] px-3 py-1.5 rounded-full text-sm font-semibold hover:bg-[#D4AC66] transition-colors"
+            >
+              Know Your Church
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
           </nav>
         )}
       </div>
