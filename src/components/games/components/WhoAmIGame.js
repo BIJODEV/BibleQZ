@@ -164,11 +164,11 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
     const characters = getCharacterSet();
     
     return (
-      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">🌍</div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Select Language</h1>
-          <p className="text-xl text-gray-600">Choose your preferred language for the game</p>
+          <h1 className="text-4xl font-heading font-bold text-ink mb-4">Select Language</h1>
+          <p className="text-xl text-slate-body">Choose your preferred language for the game</p>
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
@@ -210,16 +210,16 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
     const characters = getCharacterSet();
     
     return (
-      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">🎯</div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Game Setup</h1>
-          <p className="text-xl text-gray-600">Choose how many characters to guess</p>
+          <h1 className="text-4xl font-heading font-bold text-ink mb-4">Game Setup</h1>
+          <p className="text-xl text-slate-body">Choose how many characters to guess</p>
         </div>
 
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">Number of Characters</h2>
+            <h2 className="text-2xl font-heading font-bold text-ink">Number of Characters</h2>
             <button
               onClick={backToLanguage}
               className="text-blue-500 hover:text-blue-700 font-semibold text-sm"
@@ -283,13 +283,13 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
   // Game Over Phase
   if (gameOver) {
     return (
-      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center">
           <div className="text-6xl mb-4">🏆</div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+          <h2 className="text-3xl font-heading font-bold text-ink mb-6">
             Game Complete!
           </h2>
-          <p className="text-lg text-gray-600 mb-4">
+          <p className="text-lg text-slate-body mb-4">
             {charactersPlayed} characters guessed in {language === 'english' ? 'English' : 'Malayalam'}
           </p>
           
@@ -306,9 +306,9 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
                 </div>
               </div>
               {teams.teamA === teams.teamB ? (
-                <p className="text-xl text-gray-600">It's a tie! 🎉</p>
+                <p className="text-xl text-slate-body">It's a tie! 🎉</p>
               ) : (
-                <p className="text-xl text-gray-600">
+                <p className="text-xl text-slate-body">
                   {teams.teamA > teams.teamB ? 'Team A' : 'Team B'} wins! 🎉
                 </p>
               )}
@@ -342,17 +342,17 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
 
   if (!currentCharacter) {
     return (
-      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center">
           <div className="text-6xl mb-4">⏳</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Loading...</h2>
+          <h2 className="text-2xl font-heading font-bold text-ink mb-4">Loading...</h2>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-6 max-w-2xl mx-auto">
+    <div className="bg-white rounded-2xl border border-mist shadow-sm p-6 max-w-2xl mx-auto">
       <div className="flex justify-between items-center mb-6">
         <button
           onClick={backToSetup}
@@ -410,11 +410,11 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
 
       <div className="text-center mb-8">
         <div className="text-6xl mb-4">🤔</div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Who Am I?</h2>
+        <h2 className="text-3xl font-heading font-bold text-ink mb-2">Who Am I?</h2>
         
         {/* Progress indicator */}
         <div className="flex justify-center items-center mb-4">
-          <div className="text-gray-600 mr-3">
+          <div className="text-slate-body mr-3">
             Clue {currentClueIndex + 1} of {currentCharacter.clues.length}
           </div>
           <div className="flex space-x-1">
@@ -491,9 +491,9 @@ const WhoAmIGame = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrent
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-8 max-w-md text-center">
             <div className="text-6xl mb-4">🎯</div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">It was...</h3>
+            <h3 className="text-2xl font-heading font-bold text-ink mb-2">It was...</h3>
             <p className="text-4xl font-bold text-blue-600 mb-4">{currentCharacter.name}</p>
-            <p className="text-gray-600 mb-2">Fun fact:</p>
+            <p className="text-slate-body mb-2">Fun fact:</p>
             <p className="text-gray-700 italic">
               {currentCharacter.funFacts[Math.floor(Math.random() * currentCharacter.funFacts.length)]}
             </p>

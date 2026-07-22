@@ -97,11 +97,11 @@ const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCur
   // Language Selection
   if (gamePhase === 'language') {
     return (
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
         <div className="text-center mb-6 sm:mb-8">
           <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">📚</div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">Bible Book Order</h1>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600">Arrange Bible books in correct order</p>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-3 sm:mb-4">Bible Book Order</h1>
+          <p className="text-sm sm:text-base md:text-lg text-slate-body">Arrange Bible books in correct order</p>
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
@@ -125,11 +125,11 @@ const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCur
   // Testament Selection
   if (gamePhase === 'testament') {
     return (
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
         <div className="text-center mb-6 sm:mb-8">
           <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">📖</div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">Select Testament</h1>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600">Choose which testament to practice</p>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-3 sm:mb-4">Select Testament</h1>
+          <p className="text-sm sm:text-base md:text-lg text-slate-body">Choose which testament to practice</p>
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
@@ -155,10 +155,10 @@ const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCur
   // Game Over
   if (gameOver) {
     return (
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
         <div className="text-center">
           <div className="text-4xl sm:text-5xl md:text-6xl mb-4">🏆</div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-6">Game Complete!</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-6">Game Complete!</h2>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-6">
             Final Score: <span className="font-bold text-blue-600">{teamMode ? teams[currentTeam] : score}</span>
           </p>
@@ -177,7 +177,7 @@ const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCur
 
   // Playing Phase
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 max-w-4xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
+    <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 max-w-4xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
       <div className="flex justify-between items-start sm:items-center mb-4 sm:mb-6">
         <button onClick={() => setGamePhase('testament')} className="text-gray-500 hover:text-gray-700 font-semibold text-sm sm:text-base flex items-center">
           ← <span className="hidden xs:inline ml-1">Back</span>
@@ -210,8 +210,8 @@ const BibleBookOrder = ({ onBack, teamMode, teams, setTeams, currentTeam, setCur
       )}
 
       <div className="text-center mb-6 sm:mb-8">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-2">Arrange in Correct Order</h2>
-        <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-ink mb-2">Arrange in Correct Order</h2>
+        <p className="text-slate-body text-sm sm:text-base mb-4 sm:mb-6">
           {testament === 'oldTestament' ? 'Old Testament' : 'New Testament'} - {language === 'english' ? 'English' : 'Malayalam'}
         </p>
 

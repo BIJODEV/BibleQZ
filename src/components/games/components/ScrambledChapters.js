@@ -123,10 +123,10 @@ const ScrambledChapters = ({ onBack, teamMode, teams, setTeams, currentTeam, set
 
   if (gameOver) {
     return (
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
         <div className="text-center">
           <div className="text-4xl sm:text-5xl md:text-6xl mb-4">⏰</div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-4">Game Complete!</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-4">Game Complete!</h2>
           
           {teamMode ? (
             <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-6">
@@ -171,7 +171,7 @@ const ScrambledChapters = ({ onBack, teamMode, teams, setTeams, currentTeam, set
   }
 
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
+    <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
       <div className="flex justify-between items-start sm:items-center mb-4 sm:mb-6">
         <button
           onClick={onBack}
@@ -195,7 +195,7 @@ const ScrambledChapters = ({ onBack, teamMode, teams, setTeams, currentTeam, set
       </div>
 
       <div className="text-center mb-6 sm:mb-8">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-ink mb-4">
           Unscramble the Text!
         </h2>
         

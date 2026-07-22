@@ -161,11 +161,11 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
     const parables = getParableSet();
     
     return (
-      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">😇</div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Emoji Parables</h1>
-          <p className="text-xl text-gray-600">Guess the Bible story from emojis!</p>
+          <h1 className="text-4xl font-heading font-bold text-ink mb-4">Emoji Parables</h1>
+          <p className="text-xl text-slate-body">Guess the Bible story from emojis!</p>
         </div>
 
        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
@@ -212,10 +212,10 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
   // Game Over
   if (gameOver) {
     return (
-      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center">
           <div className="text-6xl mb-4">🏆</div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">Game Complete!</h2>
+          <h2 className="text-3xl font-heading font-bold text-ink mb-6">Game Complete!</h2>
           
           {teamMode ? (
             <div className="mb-6">
@@ -235,7 +235,7 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
               <p className="text-2xl text-gray-700 mb-2">
                 Final Score: <span className="font-bold text-blue-600">{score}</span> points
               </p>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-slate-body">
                 Completed {totalRounds} rounds in {language === 'english' ? 'English' : 'Malayalam'}
               </p>
             </div>
@@ -259,17 +259,17 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
 
   if (!currentParable) {
     return (
-      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-8 max-w-2xl mx-auto">
         <div className="text-center">
           <div className="text-6xl mb-4">⏳</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Loading...</h2>
+          <h2 className="text-2xl font-heading font-bold text-ink mb-4">Loading...</h2>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-6 max-w-2xl mx-auto">
+    <div className="bg-white rounded-2xl border border-mist shadow-sm p-6 max-w-2xl mx-auto">
       <div className="flex justify-between items-center mb-6">
         <button onClick={() => setGamePhase('language')} className="text-gray-500 hover:text-gray-700 font-semibold">
           ← Language
@@ -326,8 +326,8 @@ const EmojiParables = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
 
       <div className="text-center mb-8">
         <div className="text-6xl mb-4">😇</div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Emoji Parables</h2>
-        <p className="text-gray-600 mb-6">
+        <h2 className="text-3xl font-heading font-bold text-ink mb-2">Emoji Parables</h2>
+        <p className="text-slate-body mb-6">
           Guess the Bible story from the emojis
         </p>
 

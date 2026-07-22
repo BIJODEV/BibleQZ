@@ -147,11 +147,11 @@ const BibleTimeline = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
     const eventSet = getEventSet();
     
     return (
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
         <div className="text-center mb-6 sm:mb-8">
           <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">⏳</div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">Bible Timeline Challenge</h1>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600">Arrange Biblical events in chronological order</p>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-3 sm:mb-4">Bible Timeline Challenge</h1>
+          <p className="text-sm sm:text-base md:text-lg text-slate-body">Arrange Biblical events in chronological order</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
@@ -198,10 +198,10 @@ const BibleTimeline = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
   // Game Over
   if (gameOver) {
     return (
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
         <div className="text-center">
           <div className="text-4xl sm:text-5xl md:text-6xl mb-4">🏆</div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-6">Timeline Challenge Complete!</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-6">Timeline Challenge Complete!</h2>
           
           {teamMode ? (
             <div className="mb-6">
@@ -216,9 +216,9 @@ const BibleTimeline = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
                 </div>
               </div>
               {teams.teamA === teams.teamB ? (
-                <p className="text-lg sm:text-xl text-gray-600">It's a tie! 🎉</p>
+                <p className="text-lg sm:text-xl text-slate-body">It's a tie! 🎉</p>
               ) : (
-                <p className="text-lg sm:text-xl text-gray-600">
+                <p className="text-lg sm:text-xl text-slate-body">
                   {teams.teamA > teams.teamB ? 'Team A' : 'Team B'} wins! 🎉
                 </p>
               )}
@@ -228,7 +228,7 @@ const BibleTimeline = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
               <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-2">
                 Final Score: <span className="font-bold text-blue-600">{score}</span> points
               </p>
-              <p className="text-sm sm:text-base md:text-lg text-gray-600">
+              <p className="text-sm sm:text-base md:text-lg text-slate-body">
                 Completed {totalRounds} rounds in {language === 'english' ? 'English' : 'Malayalam'}
               </p>
             </div>
@@ -252,7 +252,7 @@ const BibleTimeline = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
 
   // Playing Phase
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 max-w-4xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
+    <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 max-w-4xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
       <div className="flex justify-between items-start sm:items-center mb-4 sm:mb-6">
         <button 
           onClick={() => setGamePhase('language')}
@@ -289,15 +289,15 @@ const BibleTimeline = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
           {/* Points Breakdown */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 mb-4">
             <div className="bg-white rounded-lg p-2 sm:p-3 border border-green-200">
-              <div className="text-xs sm:text-sm text-gray-600">Base Points</div>
+              <div className="text-xs sm:text-sm text-slate-body">Base Points</div>
               <div className="text-lg sm:text-xl font-bold text-green-600">+{basePoints}</div>
             </div>
             <div className="bg-white rounded-lg p-2 sm:p-3 border border-green-200">
-              <div className="text-xs sm:text-sm text-gray-600">Time Bonus</div>
+              <div className="text-xs sm:text-sm text-slate-body">Time Bonus</div>
               <div className="text-lg sm:text-xl font-bold text-green-600">+{Math.round(timeBonus)}</div>
             </div>
             <div className="bg-white rounded-lg p-2 sm:p-3 border border-green-200">
-              <div className="text-xs sm:text-sm text-gray-600">Hint Penalty</div>
+              <div className="text-xs sm:text-sm text-slate-body">Hint Penalty</div>
               <div className="text-lg sm:text-xl font-bold text-red-600">-{hintPenalty}</div>
             </div>
           </div>
@@ -318,8 +318,8 @@ const BibleTimeline = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
       )}
 
       <div className="text-center mb-6 sm:mb-8">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-2">Arrange Events Chronologically</h2>
-        <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-ink mb-2">Arrange Events Chronologically</h2>
+        <p className="text-slate-body text-sm sm:text-base mb-4 sm:mb-6">
           Language: {language === 'english' ? 'English' : 'Malayalam'}
         </p>
 
@@ -365,8 +365,8 @@ const BibleTimeline = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
               >
                 <div className="flex items-center justify-between">
                   <div className="text-left flex-1 mr-2">
-                    <h4 className="font-bold text-gray-800 text-sm sm:text-base">{event.event}</h4>
-                    {/* <p className="text-gray-600 text-xs sm:text-sm">{event.reference}</p> */}
+                    <h4 className="font-heading font-bold text-ink text-sm sm:text-base">{event.event}</h4>
+                    {/* <p className="text-slate-body text-xs sm:text-sm">{event.reference}</p> */}
                     {(showHint || showCorrect) && (
                       <p className="text-orange-600 font-semibold text-xs sm:text-sm mt-1">
                         Approx: {event.approximateDate}
@@ -425,13 +425,13 @@ const BibleTimeline = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurr
             ) : (
               <div className="text-center">
                 <div className="text-xl sm:text-2xl font-bold text-blue-600">{score}</div>
-                <div className="text-xs sm:text-sm text-gray-600">points</div>
+                <div className="text-xs sm:text-sm text-slate-body">points</div>
               </div>
             )}
             
             <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-gray-200">
               <h5 className="font-semibold text-gray-700 mb-1 text-xs sm:text-sm">Scoring This Round:</h5>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2 text-xs text-gray-600">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2 text-xs text-slate-body">
                 <div>Base: 30 points</div>
                 <div>Time Bonus: +{Math.max(0, timer * 1.5)}</div>
                 <div>Hint Penalty: {showHint ? '-25' : '0'} points</div>

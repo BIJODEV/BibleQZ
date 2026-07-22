@@ -198,13 +198,13 @@ const BibleQuiz = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrentT
   // Language Selection Phase
   if (gamePhase === 'language') {
     return (
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
         <div className="text-center mb-6 sm:mb-8">
           <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">🌍</div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-2 sm:mb-4">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-2 sm:mb-4">
             Select Language
           </h1>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600">
+          <p className="text-sm sm:text-base md:text-lg text-slate-body">
             Choose your preferred language for the quiz
           </p>
         </div>
@@ -247,13 +247,13 @@ const BibleQuiz = ({ onBack, teamMode, teams, setTeams, currentTeam, setCurrentT
 // Testament Selection Phase (English only)
 if (gamePhase === 'testament') {
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-5 md:p-6 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
+    <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-5 md:p-6 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
       <div className="text-center mb-4 sm:mb-6">
         <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3">📖</div>
-        <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-2">
+        <h1 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-ink mb-2">
           Select Quiz Type
         </h1>
-        <p className="text-xs sm:text-sm text-gray-600">
+        <p className="text-xs sm:text-sm text-slate-body">
           Choose what type of Bible quiz you want to take
         </p>
       </div>
@@ -342,13 +342,13 @@ if (gamePhase === 'book') {
   const testamentColor = quizType === 'old' ? 'orange' : 'blue';
 
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-5 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
+    <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-5 max-w-md mx-3 sm:mx-auto my-2 sm:my-4">
       <div className="text-center mb-4 sm:mb-5">
         <div className="text-3xl sm:text-4xl mb-2">📚</div>
-        <h1 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
+        <h1 className="text-lg sm:text-xl font-heading font-bold text-ink mb-1">
           {testamentName}
         </h1>
-        <p className="text-xs sm:text-sm text-gray-600">
+        <p className="text-xs sm:text-sm text-slate-body">
           Choose a book to focus on
         </p>
       </div>
@@ -424,14 +424,14 @@ if (gamePhase === 'book') {
     const selectedBookName = selectedBook || (quizType === 'old' ? 'All Old Testament Books' : quizType === 'new' ? 'All New Testament Books' : 'General Bible');
 
     return (
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 max-w-md sm:max-w-xl mx-3 sm:mx-auto my-2 sm:my-4">
+      <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-md sm:max-w-xl mx-3 sm:mx-auto my-2 sm:my-4">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">📝</div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-3 sm:mb-4">
             Quiz Setup
           </h1>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600">
+          <p className="text-sm sm:text-base md:text-lg text-slate-body">
             Choose how many questions you want to answer
           </p>
         </div>
@@ -451,7 +451,7 @@ if (gamePhase === 'book') {
         {/* Question Count Selector */}
         <div className="mb-6 sm:mb-8">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2 sm:gap-0">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 text-center sm:text-left">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-ink text-center sm:text-left">
               Number of Questions
             </h2>
             <button
@@ -513,10 +513,10 @@ if (gamePhase === 'book') {
      // Results Phase
     if (showResult) {
     return (
-        <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 max-w-2xl mx-4 sm:mx-6 md:mx-auto my-4 sm:my-6">
+        <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 md:p-8 max-w-2xl mx-4 sm:mx-6 md:mx-auto my-4 sm:my-6">
         <div className="text-center">
             <div className="text-4xl sm:text-5xl md:text-6xl mb-4">🎉</div>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-ink mb-4">
             {language === 'english' ? 'English' : 'Malayalam'} Quiz Complete!
             </h2>
             
@@ -536,7 +536,7 @@ if (gamePhase === 'book') {
                     </p>
                 </div>
                 </div>
-                <p className="text-base sm:text-lg text-gray-600">
+                <p className="text-base sm:text-lg text-slate-body">
                 {teams.teamA === teams.teamB 
                     ? "It's a tie! 🎉" 
                     : teams.teamA > teams.teamB 
@@ -550,7 +550,7 @@ if (gamePhase === 'book') {
                 <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-2">
                 You scored <span className="font-bold text-blue-600">{score}</span> out of {selectedQuestions.length}
                 </p>
-                <p className="text-base sm:text-lg text-gray-600">
+                <p className="text-base sm:text-lg text-slate-body">
                 Accuracy: <span className="font-bold text-green-600">
                     {Math.round((score / selectedQuestions.length) * 100)}%
                 </span>
@@ -582,7 +582,7 @@ if (gamePhase === 'book') {
   const currentQuestionTeam = teamMode ? getQuestionTeam(currentQuestionIndex) : null;
 
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
+    <div className="bg-white rounded-2xl border border-mist shadow-sm p-4 sm:p-6 max-w-2xl mx-3 sm:mx-4 md:mx-auto my-2 sm:my-4">
       <div className="flex justify-between items-start sm:items-center mb-4 sm:mb-6">
         <button 
           onClick={() => setGamePhase('setup')}
@@ -624,7 +624,7 @@ if (gamePhase === 'book') {
     )}
 
     <div className="mb-6">
-      <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-ink mb-4">
         {currentQuestion.question}
       </h2>
       
@@ -679,7 +679,7 @@ if (gamePhase === 'book') {
             {currentQuestion.explanation}
           </p>
           {teamMode && selectedAnswer === currentQuestion.correct && (
-            <p className="text-xs sm:text-sm text-gray-600 mt-2">
+            <p className="text-xs sm:text-sm text-slate-body mt-2">
               +20 points for {currentQuestionTeam === 'teamA' ? 'Team A' : 'Team B'}!
             </p>
           )}
