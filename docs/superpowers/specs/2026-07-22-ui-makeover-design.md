@@ -114,10 +114,24 @@ New neutral tokens to add:
 ### Shared primitives (Phase 1 deliverable)
 
 - `src/components/UI/Button.jsx` — variants: `primary` (filled blue,
-  `shadow-brand`), `secondary` (white/outline), `ghost` (text-only). Props:
-  `variant`, standard button props passthrough, `as={Link}` support for
-  router links styled as buttons (several existing call sites style a
-  `<Link>` as a button manually — this consolidates that).
+  `shadow-brand`), `secondary` (white/outline), `accent` (filled violet,
+  `shadow-brand` — for CTAs that need primary-level visual weight but a
+  distinct color, e.g. a Games link sitting next to a primary "Create
+  Quiz" CTA), `ghost` (text-only), `outline-inverse` (transparent/white
+  border+text — for buttons placed on a solid colored background, where
+  overriding a filled variant's own background/text color via `className`
+  string concatenation is unreliable: Tailwind resolves conflicting
+  utility classes by their position in the generated stylesheet, not by
+  their order in the `className` string, so "override the variant's
+  background via className" is a real footgun, not just a style
+  preference). Button's own base classes intentionally exclude padding/
+  text-size — only structural classes (radius, font-weight, transition,
+  flex layout) and each variant's color treatment are baked in, so
+  callers always control sizing via `className` with no risk of
+  colliding with a variant's own classes. Props: `variant`, standard
+  button props passthrough, `as={Link}` support for router links styled
+  as buttons (several existing call sites style a `<Link>` as a button
+  manually — this consolidates that).
 - `src/components/UI/Input.jsx` — text input with the new `rounded-btn`,
   `mist` border, focus ring in `bible-blue`. Used to replace repeated
   inline input styling (e.g. `Login.jsx`'s phone/OTP inputs).
