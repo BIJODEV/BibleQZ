@@ -147,6 +147,23 @@ New neutral tokens to add:
   stays; only visual restyling (colors, type, icons replacing emoji nav
   triggers where applicable).
 
+## Phase 2 addendum: Login/Auth (decided at Phase 2 kickoff)
+
+Phase 1 shipped and is live. Phase 2 (`Login.jsx`, `ProtectedRoute.jsx`) is
+mostly mechanical reskinning with the already-locked system — `Button`/
+`Input` primitives, `brand-blue`/`brand-violet`/`ink`/`slate-body`/`mist`
+tokens, `font-heading`, `Church` icon for the badge (consistent with
+Header/Footer). One new decision:
+
+- **Google sign-in icon:** replace the current `<img src="https://www.google.com/favicon.ico">` 
+  hack with an inline, no-network-request Google "G" logomark SVG. This is
+  a legitimate polish item (favicon.ico is an unreliable, non-brand asset
+  for this purpose), not scope creep — everything else about the
+  Google/Phone-OTP tab flow stays behaviorally identical.
+- Error/success status colors (red-50/border-red-200, green-50/border-green-200)
+  stay as Tailwind defaults — semantic status colors are intentionally
+  exempt from the brand palette, not part of this migration.
+
 ## Out of scope for this design doc
 
 - The actual per-phase implementation plans (written separately, one per
