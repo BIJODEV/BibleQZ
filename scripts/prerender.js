@@ -59,7 +59,9 @@ async function prerenderRoute(browser, route) {
 
 async function main() {
   const server = await startServer();
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
 
   try {
     for (const route of ROUTES) {
