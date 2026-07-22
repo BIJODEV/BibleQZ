@@ -32,7 +32,7 @@ const Header = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className="hover:text-brand-violet transition-colors font-medium"
+                className="hover:text-white transition-colors font-medium"
               >
                 {link.label}
               </Link>
@@ -56,7 +56,7 @@ const Header = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className="block hover:text-brand-violet transition-colors font-medium py-2"
+                className="block hover:text-white transition-colors font-medium py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}

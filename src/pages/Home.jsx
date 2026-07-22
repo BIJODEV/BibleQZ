@@ -121,7 +121,7 @@ const Home = () => {
           {/* Desktop Grid Layout */}
           <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 px-4">
             {FEATURES.map((feature, index) => (
-              <div key={index} className="card text-center hover:shadow-lg transition-shadow duration-300">
+              <div key={index} className="card rounded-2xl border border-mist text-center hover:shadow-lg transition-shadow duration-300">
                 <div className="bg-sky-tint-1 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="w-7 h-7 md:w-8 md:h-8 text-brand-blue" />
                 </div>
@@ -184,7 +184,7 @@ const Home = () => {
           {/* Desktop Grid */}
           <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4">
             {USE_CASES.map((useCase, index) => (
-              <div key={index} className="card text-center hover:border-brand-blue transition-colors duration-300">
+              <div key={index} className="card rounded-2xl border border-mist text-center hover:border-brand-blue transition-colors duration-300">
                 <useCase.icon className="w-7 h-7 md:w-8 md:h-8 text-brand-blue mx-auto mb-3" />
                 <h3 className="font-heading font-semibold text-ink mb-2 text-base md:text-lg">{useCase.shortTitle}</h3>
                 <p className="text-slate-body text-sm md:text-base">{useCase.desc}</p>
@@ -227,7 +227,7 @@ const Home = () => {
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center space-x-2 text-xs md:text-sm">
                     <Check className="w-4 h-4 text-green-500" />
-                    <span className="text-gray-700">{feature}</span>
+                    <span className="text-slate-body">{feature}</span>
                   </div>
                 ))}
               </div>
