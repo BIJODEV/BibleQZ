@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trash2 } from 'lucide-react';
 
 const QuestionCard = ({ question, index, onUpdate, onRemove, onOptionUpdate, onNumberOfOptionsChange }) => {
   const optionLabels = ['A', 'B', 'C', 'D'];
@@ -9,29 +10,31 @@ const QuestionCard = ({ question, index, onUpdate, onRemove, onOptionUpdate, onN
   };
 
   return (
-    <div className="border-2 border-gray-200 rounded-xl p-4 sm:p-6 bg-white">
+    <div className="border border-mist rounded-2xl p-4 sm:p-6 bg-white shadow-sm">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
-        <h3 className="text-lg sm:text-xl font-semibold text-bible-blue">
+        <h3 className="text-lg sm:text-xl font-heading font-semibold text-brand-blue">
           Question {index + 1}
         </h3>
         <button
           onClick={onRemove}
-          className="text-red-500 hover:text-red-700 font-semibold text-sm w-fit sm:w-auto"
+          className="text-red-500 hover:text-red-700 flex items-center space-x-1 font-medium text-sm transition-colors"
+          title="Remove Question"
         >
-          Remove Question
+          <Trash2 className="w-4 h-4" />
+          <span className="sm:hidden">Remove Question</span>
         </button>
       </div>
 
       {/* Question Input */}
       <div className="mb-4 sm:mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-ink mb-2">
           Question Text *
         </label>
         <textarea
           value={question.question}
           onChange={(e) => onUpdate({ question: e.target.value })}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bible-blue focus:border-bible-blue text-sm sm:text-base"
+          className="w-full p-3 border border-mist rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue text-sm sm:text-base text-slate-body outline-none transition-all"
           rows="3"
           placeholder="Enter your question here..."
         />
@@ -39,20 +42,20 @@ const QuestionCard = ({ question, index, onUpdate, onRemove, onOptionUpdate, onN
 
       {/* Number of Options Selector */}
       <div className="mb-4 sm:mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-ink mb-2">
           Number of Options
         </label>
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           <select
             value={question.numberOfOptions || 4}
             onChange={handleNumberOfOptionsChange}
-            className="w-full sm:w-48 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bible-blue focus:border-bible-blue text-sm sm:text-base"
+            className="w-full sm:w-48 p-3 border border-mist rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue text-sm sm:text-base text-slate-body outline-none transition-all bg-white"
           >
             <option value={2}>2 Options</option>
             <option value={3}>3 Options</option>
             <option value={4}>4 Options</option>
           </select>
-          <p className="text-xs sm:text-sm text-gray-500">
+          <p className="text-xs sm:text-sm text-slate-body">
             Choose how many options this question should have
           </p>
         </div>
@@ -60,7 +63,7 @@ const QuestionCard = ({ question, index, onUpdate, onRemove, onOptionUpdate, onN
 
       {/* Options */}
       <div className="space-y-3 mb-4 sm:mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-ink mb-2">
           Options (Select the correct answer) *
         </label>
         
@@ -71,8 +74,8 @@ const QuestionCard = ({ question, index, onUpdate, onRemove, onOptionUpdate, onN
           return (
             <div 
               key={optionIndex} 
-              className={`flex flex-col sm:flex-row sm:items-center gap-3 p-3 sm:p-4 rounded-lg ${
-                isActive ? 'bg-white' : 'bg-gray-50 opacity-60'
+              className={`flex flex-col sm:flex-row sm:items-center gap-3 p-3 sm:p-4 rounded-xl border transition-colors ${
+                isActive ? 'bg-white border-mist' : 'bg-gray-50 border-transparent opacity-60'
               }`}
             >
               {/* Radio + Label Container */}
@@ -82,11 +85,11 @@ const QuestionCard = ({ question, index, onUpdate, onRemove, onOptionUpdate, onN
                   name={`correct-${question.id}`}
                   checked={question.correctAnswer === optionIndex}
                   onChange={() => onUpdate({ correctAnswer: optionIndex })}
-                  className="h-5 w-5 text-bible-blue focus:ring-bible-blue border-gray-300 flex-shrink-0"
+                  className="h-5 w-5 text-brand-blue focus:ring-brand-blue border-mist flex-shrink-0 cursor-pointer"
                   disabled={!isActive}
                 />
                 
-                <span className={`font-semibold w-6 text-center ${isActive ? 'text-bible-blue' : 'text-gray-400'} flex-shrink-0`}>
+                <span className={`font-semibold w-6 text-center ${isActive ? 'text-brand-blue' : 'text-slate-body/50'} flex-shrink-0`}>
                   {optionLabel}
                 </span>
               </div>
@@ -96,10 +99,10 @@ const QuestionCard = ({ question, index, onUpdate, onRemove, onOptionUpdate, onN
                 type="text"
                 value={option}
                 onChange={(e) => onOptionUpdate(optionIndex, e.target.value)}
-                className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-bible-blue focus:border-bible-blue text-sm sm:text-base ${
+                className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue text-sm sm:text-base outline-none transition-all ${
                   isActive 
-                    ? 'border-gray-300 bg-white' 
-                    : 'border-gray-200 bg-gray-100 text-gray-500 cursor-not-allowed'
+                    ? 'border-mist bg-white text-slate-body' 
+                    : 'border-transparent bg-gray-100 text-slate-body/50 cursor-not-allowed'
                 }`}
                 placeholder={
                   isActive 
@@ -115,13 +118,13 @@ const QuestionCard = ({ question, index, onUpdate, onRemove, onOptionUpdate, onN
 
       {/* Explanation (Optional) */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-ink mb-2">
           Explanation (Optional)
         </label>
         <textarea
           value={question.explanation}
           onChange={(e) => onUpdate({ explanation: e.target.value })}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bible-blue focus:border-bible-blue text-sm sm:text-base"
+          className="w-full p-3 border border-mist rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue text-sm sm:text-base text-slate-body outline-none transition-all"
           rows="2"
           placeholder="Add explanation for the correct answer..."
         />

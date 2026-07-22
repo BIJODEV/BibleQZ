@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Trophy, Award, ThumbsUp, Star, CheckCircle, XCircle, RotateCcw, Home } from 'lucide-react';
 import { encodeResultsForSharing } from '../../utils/quizEncoder';
+import Button from '../components/Button';
 
 const Results = ({ quiz, answers, userName, startTime }) => {
   const [score, setScore] = useState(0);
@@ -45,120 +47,89 @@ const Results = ({ quiz, answers, userName, startTime }) => {
     }
   }, [quiz, answers, userName, startTime, score]);
 
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(resultsLink);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
-
   const percentage = (score / quiz.questions.length) * 100;
+  
+  let FeedbackIcon = Star;
   let message = '';
-  let emoji = '';
+  let iconColor = 'text-brand-blue';
 
   if (percentage >= 90) {
     message = 'Excellent! You have great knowledge of this passage!';
-    emoji = '🎉';
+    FeedbackIcon = Trophy;
+    iconColor = 'text-amber-500';
   } else if (percentage >= 70) {
     message = 'Great job! You understand this passage well.';
-    emoji = '👍';
+    FeedbackIcon = Award;
+    iconColor = 'text-brand-blue';
   } else if (percentage >= 50) {
     message = 'Good effort! Keep meditating on God\'s Word.';
-    emoji = '🙏';
+    FeedbackIcon = ThumbsUp;
+    iconColor = 'text-green-600';
   } else {
     message = 'Keep studying! The Word of God is rich and deep.';
-    emoji = '💪';
+    FeedbackIcon = Star;
+    iconColor = 'text-slate-400';
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="card text-center">
-        <div className="text-6xl mb-4">{emoji}</div>
-        <h1 className="text-4xl font-bold text-bible-blue mb-4">Quiz Completed!</h1>
+    <div className="max-w-4xl mx-auto space-y-8">
+      {/* Overview Card */}
+      <div className="bg-white border border-mist rounded-2xl shadow-sm p-8 text-center">
+        <FeedbackIcon className={`w-16 h-16 mx-auto mb-6 ${iconColor}`} />
+        <h1 className="text-4xl font-heading font-bold text-ink mb-6">Quiz Completed!</h1>
         
-        <div className="bg-gradient-to-r from-bible-blue to-bible-purple inline-block p-1 rounded-full mb-6">
-          <div className="bg-white rounded-full p-8">
-            <div className="text-5xl font-bold text-bible-blue mb-2">
+        <div className="bg-gradient-to-r from-brand-blue to-indigo-600 inline-block p-1 rounded-full mb-8 shadow-sm">
+          <div className="bg-white rounded-full p-8 px-12">
+            <div className="text-5xl font-heading font-bold text-brand-blue mb-2">
               {score}/{quiz.questions.length}
             </div>
-            <div className="text-2xl font-semibold text-bible-gold">
+            <div className="text-2xl font-heading font-semibold text-slate-body">
               {percentage.toFixed(0)}%
             </div>
           </div>
         </div>
 
-        <p className="text-xl text-gray-600 mb-2">
-          Great job, <strong>{userName}</strong>!
+        <p className="text-xl text-slate-body mb-3">
+          Great job, <strong className="text-ink">{userName}</strong>!
         </p>
-        <p className="text-lg text-bible-blue font-semibold mb-8">
+        <p className="text-lg text-brand-blue font-heading font-semibold mb-10">
           {message}
         </p>
 
-        {/* Share Results */}
-        {/* <div className="bg-blue-50 rounded-lg p-6 mb-6 border border-blue-200">
-          <h3 className="text-lg font-semibold text-blue-800 mb-3">
-            📤 Share Your Results
-          </h3>
-          <p className="text-blue-700 mb-4">
-            Copy this link and send it to your quiz creator:
-          </p>
-          
-          <div className="flex space-x-2 mb-3">
-            <input
-              type="text"
-              value={resultsLink}
-              readOnly
-              className="flex-1 p-3 border border-blue-300 rounded-lg bg-white text-blue-800 font-mono text-sm"
-            />
-            <button
-              onClick={copyToClipboard}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold whitespace-nowrap"
-            >
-              {copied ? 'Copied!' : 'Copy'}
-            </button>
-          </div>
-          
-          <div className="text-sm text-blue-600 space-y-1">
-            <p>📧 Send this link via email, WhatsApp, or any messaging app</p>
-            <p>👨‍🏫 The quiz creator will import your results into their dashboard</p>
-            <p>✅ Your score: <strong>{score}/{quiz.questions.length} ({percentage.toFixed(1)}%)</strong></p>
-          </div>
-        </div> */}
-
         {/* Results Summary */}
-        <div className="bg-gray-50 rounded-lg p-6 mb-8 text-left">
-          <h3 className="font-semibold text-bible-blue mb-4">Quiz Summary:</h3>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div><strong>Quiz:</strong> {quiz.title}</div>
-            <div><strong>Passage:</strong> {quiz.passage}</div>
-            <div><strong>Your Score:</strong> {score} out of {quiz.questions.length}</div>
-            <div><strong>Percentage:</strong> {percentage.toFixed(1)}%</div>
+        <div className="bg-slate-50 border border-mist rounded-2xl p-6 mb-8 text-left">
+          <h3 className="font-heading font-semibold text-ink mb-4">Quiz Summary:</h3>
+          <div className="grid md:grid-cols-2 gap-4 text-sm text-slate-body">
+            <div><strong className="text-ink font-medium">Quiz:</strong> {quiz.title}</div>
+            <div><strong className="text-ink font-medium">Passage:</strong> {quiz.passage}</div>
+            <div><strong className="text-ink font-medium">Your Score:</strong> {score} out of {quiz.questions.length}</div>
+            <div><strong className="text-ink font-medium">Percentage:</strong> {percentage.toFixed(1)}%</div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex space-x-4 justify-center">
-          <button
+        <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 justify-center">
+          <Button
+            variant="primary"
             onClick={() => window.location.reload()}
-            className="btn-secondary px-8 py-3"
+            className="flex items-center justify-center gap-2 px-8 py-3"
           >
-            Retake Quiz
-          </button>
-          <a
-            href="/"
-            className="px-8 py-3 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors"
-          >
-            Back to Home
+            <RotateCcw className="w-4 h-4" /> Retake Quiz
+          </Button>
+          <a href="/" className="block">
+            <Button
+              variant="secondary"
+              className="w-full flex items-center justify-center gap-2 px-8 py-3"
+            >
+              <Home className="w-4 h-4" /> Back to Home
+            </Button>
           </a>
         </div>
       </div>
 
       {/* Detailed Results */}
-      <div className="card mt-8">
-        <h3 className="text-2xl font-bold text-bible-blue mb-6">Detailed Results</h3>
+      <div className="bg-white border border-mist rounded-2xl shadow-sm p-6 sm:p-8">
+        <h3 className="text-2xl font-heading font-bold text-ink mb-8 border-b border-mist pb-4">Detailed Results</h3>
         
         <div className="space-y-6">
           {quiz.questions.map((question, index) => {
@@ -168,47 +139,53 @@ const Results = ({ quiz, answers, userName, startTime }) => {
             return (
               <div
                 key={index}
-                className={`border-2 rounded-lg p-6 ${
-                  isCorrect ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'
+                className={`border rounded-2xl p-6 transition-colors ${
+                  isCorrect ? 'border-green-200 bg-green-50/50' : 'border-red-200 bg-red-50/50'
                 }`}
               >
-                <div className="flex items-start space-x-3 mb-4">
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold ${
-                    isCorrect ? 'bg-green-500' : 'bg-red-500'
-                  }`}>
-                    {isCorrect ? '✓' : '✗'}
+                <div className="flex items-start space-x-4 mb-5">
+                  <div className="mt-1 flex-shrink-0">
+                    {isCorrect 
+                      ? <CheckCircle className="w-7 h-7 text-green-500" />
+                      : <XCircle className="w-7 h-7 text-red-500" />
+                    }
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg">
+                    <h4 className="font-heading font-semibold text-lg text-ink leading-tight">
                       Question {index + 1}: {question.question}
                     </h4>
                   </div>
                 </div>
 
-                <div className="ml-11 space-y-2">
+                <div className="ml-11 space-y-3">
                   {question.options.map((option, optIndex) => {
-                    let optionClass = 'text-gray-700';
+                    let optionClass = 'text-slate-body';
                     if (optIndex === question.correctAnswer) {
-                      optionClass = 'text-green-700 font-semibold';
+                      optionClass = 'text-green-700 font-medium bg-green-100/50 px-3 py-1.5 rounded-lg inline-block w-full';
                     } else if (optIndex === userAnswer && !isCorrect) {
-                      optionClass = 'text-red-700 font-semibold';
+                      optionClass = 'text-red-700 font-medium bg-red-100/50 px-3 py-1.5 rounded-lg inline-block w-full line-through decoration-red-300';
+                    } else {
+                      optionClass += ' px-3 py-1.5 inline-block w-full';
                     }
                     
                     return (
                       <div key={optIndex} className={optionClass}>
-                        <span className="font-semibold">
+                        <span className="font-semibold mr-2 opacity-75">
                           {['A', 'B', 'C', 'D'][optIndex]}.
-                        </span>{' '}
+                        </span>
                         {option}
-                        {optIndex === question.correctAnswer && ' ✓'}
-                        {optIndex === userAnswer && !isCorrect && ' ✗ (Your answer)'}
+                        {optIndex === question.correctAnswer && <span className="ml-2 text-green-600 font-semibold text-sm tracking-wide">(Correct)</span>}
+                        {optIndex === userAnswer && !isCorrect && <span className="ml-2 text-red-500 font-semibold text-sm tracking-wide">(Your answer)</span>}
                       </div>
                     );
                   })}
                   
                   {question.explanation && (
-                    <div className="mt-3 p-3 bg-white rounded border">
-                      <strong>Explanation:</strong> {question.explanation}
+                    <div className="mt-4 p-4 bg-white border border-mist rounded-xl text-slate-body text-sm leading-relaxed shadow-sm">
+                      <strong className="text-ink font-heading mb-1 block flex items-center gap-2">
+                         <BookOpen className="w-4 h-4 text-brand-blue" /> Explanation:
+                      </strong> 
+                      {question.explanation}
                     </div>
                   )}
                 </div>
