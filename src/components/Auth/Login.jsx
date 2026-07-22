@@ -1,5 +1,23 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import Button from '../UI/Button';
+import Input from '../UI/Input';
+import { Church } from 'lucide-react';
+
+const GoogleIcon = (props) => (
+  <svg viewBox="0 0 48 48" width="20" height="20" {...props}>
+    <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12
+      c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24
+      c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+    <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039
+      l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+    <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36
+      c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+    <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571
+      c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24
+      C44,22.659,43.862,21.35,43.611,20.083z"/>
+  </svg>
+);
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState('google'); // 'google' or 'phone'
@@ -28,7 +46,7 @@ const Login = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       if (!phoneNumber) {
         setError('Please enter your phone number');
         return;
@@ -54,7 +72,7 @@ const Login = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       if (!otp) {
         setError('Please enter the OTP');
         return;
@@ -76,24 +94,24 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-sky-tint-1 to-sky-tint-2 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="card text-center">
-          <div className="bg-bible-gold w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="text-3xl text-bible-blue">⛪</span>
+          <div className="bg-brand-violet w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Church className="w-9 h-9 text-white" />
           </div>
-          
-          <h1 className="text-3xl font-bold text-bible-blue mb-2">Welcome to BibleQ</h1>
-          <p className="text-gray-600 mb-8">Sign in to create and manage your Bible quizzes</p>
+
+          <h1 className="text-3xl font-heading font-bold text-ink mb-2">Welcome to BibleQ</h1>
+          <p className="text-slate-body mb-8">Sign in to create and manage your Bible quizzes</p>
 
           {/* Tab Navigation */}
-          <div className="flex border-b border-gray-200 mb-6">
+          <div className="flex border-b border-mist mb-6">
             <button
               onClick={() => setActiveTab('google')}
               className={`flex-1 py-3 font-medium ${
                 activeTab === 'google'
-                  ? 'text-bible-blue border-b-2 border-bible-blue'
-                  : 'text-gray-500'
+                  ? 'text-brand-blue border-b-2 border-brand-blue'
+                  : 'text-slate-body'
               }`}
             >
               Google Sign-In
@@ -102,8 +120,8 @@ const Login = () => {
               onClick={() => setActiveTab('phone')}
               className={`flex-1 py-3 font-medium ${
                 activeTab === 'phone'
-                  ? 'text-bible-blue border-b-2 border-bible-blue'
-                  : 'text-gray-500'
+                  ? 'text-brand-blue border-b-2 border-brand-blue'
+                  : 'text-slate-body'
               }`}
             >
               Phone OTP
@@ -120,22 +138,19 @@ const Login = () => {
           {/* Google Sign-In */}
           {activeTab === 'google' && (
             <div className="space-y-4">
-              <button
+              <Button
+                variant="secondary"
                 onClick={handleGoogleSignIn}
                 disabled={loading}
-                className="w-full flex items-center justify-center space-x-3 bg-white border border-gray-300 rounded-lg p-4 hover:bg-gray-50 transition-colors disabled:opacity-50"
+                className="w-full p-4 disabled:opacity-50"
               >
-                <img 
-                  src="https://www.google.com/favicon.ico" 
-                  alt="Google" 
-                  className="w-5 h-5"
-                />
-                <span className="font-medium text-gray-700">
+                <GoogleIcon />
+                <span className="font-medium text-ink">
                   {loading ? 'Signing in...' : 'Continue with Google'}
                 </span>
-              </button>
-              
-              <p className="text-sm text-gray-500">
+              </Button>
+
+              <p className="text-sm text-slate-body">
                 Secure sign-in with your Google account
               </p>
             </div>
@@ -147,28 +162,27 @@ const Login = () => {
               {!otpSent ? (
                 <>
                   <div className="text-left">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-ink mb-2">
                       Phone Number *
                     </label>
-                    <input
+                    <Input
                       type="tel"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
                       placeholder="Enter your phone number"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bible-blue focus:border-bible-blue"
                     />
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-slate-body mt-1">
                       Include country code (e.g., +91 for India)
                     </p>
                   </div>
-                  
-                  <button
+
+                  <Button
                     onClick={handleSendOTP}
                     disabled={loading}
-                    className="w-full btn-primary py-3 disabled:bg-gray-400"
+                    className="w-full py-3 disabled:opacity-50"
                   >
                     {loading ? 'Sending OTP...' : 'Send OTP'}
-                  </button>
+                  </Button>
                 </>
               ) : (
                 <>
@@ -177,35 +191,35 @@ const Login = () => {
                       OTP sent to {phoneNumber}
                     </p>
                   </div>
-                  
+
                   <div className="text-left">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-ink mb-2">
                       Enter OTP *
                     </label>
-                    <input
+                    <Input
                       type="text"
                       value={otp}
                       onChange={(e) => setOtp(e.target.value)}
                       placeholder="Enter 6-digit OTP"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bible-blue focus:border-bible-blue"
                       maxLength={6}
                     />
                   </div>
-                  
+
                   <div className="flex space-x-2">
-                    <button
+                    <Button
                       onClick={handleVerifyOTP}
                       disabled={loading}
-                      className="flex-1 btn-primary py-3 disabled:bg-gray-400"
+                      className="flex-1 py-3 disabled:opacity-50"
                     >
                       {loading ? 'Verifying...' : 'Verify OTP'}
-                    </button>
-                    <button
+                    </Button>
+                    <Button
+                      variant="secondary"
                       onClick={resetPhoneAuth}
-                      className="px-4 py-3 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50"
+                      className="px-4 py-3"
                     >
                       Back
-                    </button>
+                    </Button>
                   </div>
                 </>
               )}
@@ -215,7 +229,7 @@ const Login = () => {
           {/* Privacy Notice */}
           <div className="mt-8 p-4 bg-gray-50 rounded-lg">
             <p className="text-xs text-gray-500 text-center">
-              By signing in, you agree to our Terms of Service and Privacy Policy. 
+              By signing in, you agree to our Terms of Service and Privacy Policy.
               Your data is secure and will only be used for quiz creation and management.
             </p>
           </div>
