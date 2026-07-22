@@ -43,13 +43,32 @@ is "warm & modern," direction is **Modern Sky** (blue/violet gradient, bold
 geometric sans, soft glow shadows), centered hero layout, Poppins headline
 font.
 
-### Color tokens (replace in `tailwind.config.js`)
+### Color tokens (add to `tailwind.config.js`, alongside existing tokens)
 
-| Token | Old value | New value | Usage |
+`bible-blue`, `bible-purple`, `bible-gold` are used throughout Login, Quiz,
+and Games components not touched until Phases 2–4. Changing their hex
+values now would instantly recolor the whole app while only Phase 1's
+components (Header/Footer/Home) get matching shape/type/icon updates —
+"new color, old shape" on every untouched page until later phases catch
+up. Instead, add **new** tokens and migrate pages to them phase by phase;
+`bible-blue`/`bible-purple`/`bible-gold` stay defined at their current
+values and keep rendering exactly as they do today until each page's
+phase migrates it off them.
+
+| New token | Value | Usage | Replaces (as each phase migrates) |
 |---|---|---|---|
-| `bible-blue` | `#1E3A8A` | `#2E6FDB` | Primary — CTAs, links, active nav, header/footer background |
-| `bible-purple` | `#4C1D95` | `#7C5CFC` | Accent — gradients, secondary highlights |
-| `bible-gold` | `#D4AF37` | `#D4AF37` (unchanged) | **Scoped to Games section only** — legacy brand continuity for game CTAs/badges, not used as a primary color elsewhere anymore |
+| `brand-blue` | `#2E6FDB` | Primary — CTAs, links, active nav, header/footer background | `bible-blue` (`#1E3A8A`) |
+| `brand-violet` | `#7C5CFC` | Accent — gradients, secondary highlights | `bible-purple` (`#4C1D95`) |
+
+`bible-gold` (`#D4AF37`) is **not replaced at all** — it stays exactly as
+it is, permanently scoped to the Games section (Phase 4) for legacy brand
+continuity on game CTAs/badges. Phase 4 keeps using `bible-gold` rather
+than migrating it to a `brand-*` token.
+
+By the time Phase 4 ships, every page will be on `brand-blue`/`brand-violet`
+except Games' gold accents; the old `bible-blue`/`bible-purple` tokens can
+then be deleted from `tailwind.config.js` as a small cleanup (not its own
+phase — fold it into Phase 4's task list).
 
 New neutral tokens to add:
 
