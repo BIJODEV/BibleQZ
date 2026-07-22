@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import MetaTags from '../components/SEO/MetaTags';
 import Button from '../components/UI/Button';
+import KnowMyChurchPromo from '../components/promotions/KnowMyChurchPromo';
 import bibleGamesImage from '../assets/images/games.png';
 import {
   Church,
@@ -260,6 +261,13 @@ const Home = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Know Your Church Promo */}
+      <section className="py-8 md:py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <KnowMyChurchPromo />
         </div>
       </section>
 
