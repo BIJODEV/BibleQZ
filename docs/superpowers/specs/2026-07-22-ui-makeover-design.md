@@ -75,7 +75,7 @@ New neutral tokens to add:
 | Token | Value | Usage |
 |---|---|---|
 | `ink` | `#1B2333` | Headings |
-| `slate` | `#5B6474` | Body text |
+| `slate-body` | `#5B6474` | Body text (named `slate-body`, not `slate` — avoids colliding conceptually with Tailwind's built-in `slate-*` shade scale) |
 | `mist` | `#DCE3F0` | Borders |
 | `sky-tint-1` | `#EAF4FB` | Gradient background start |
 | `sky-tint-2` | `#F1EAFB` | Gradient background end |
