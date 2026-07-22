@@ -102,10 +102,9 @@ Expected: exits 0, prints the three `Prerendered ...` lines (existing prerender 
 
 Then run:
 ```bash
-grep -c "brand-blue" build/static/css/main.*.css
 grep -o 'fonts.googleapis.com/css2[^"]*' build/index.html
 ```
-Expected: first command prints a number ≥ 1 (confirms Tailwind generated the new utility class), second command prints the Poppins/Inter stylesheet URL (confirms the font link survived the prerender snapshot).
+Expected: prints the Poppins/Inter stylesheet URL (confirms the font link survived the prerender snapshot). Note: there is no build-output check for the new color/shadow/radius tokens at this step — Tailwind's JIT compiler only emits utility classes for tokens actually referenced in JSX, and no component references them yet (that starts in Task 2). Verify those tokens by reading `tailwind.config.js` directly instead.
 
 - [ ] **Step 5: Commit**
 
