@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { AlertCircle, BookOpen, ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import { getQuizFromFirestore, submitQuizResults } from '../../utils/firebaseQuiz';
 import Results from './Results';
-import Button from '../components/Button';
+import Button from '../UI/Button';
 
 const QuizTaker = () => {
   const [userName, setUserName] = useState('');

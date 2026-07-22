@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Trophy, Award, ThumbsUp, Star, CheckCircle, XCircle, RotateCcw, Home } from 'lucide-react';
+import { Trophy, Award, ThumbsUp, Star, CheckCircle, XCircle, RotateCcw, Home, BookOpen } from 'lucide-react';
 import { encodeResultsForSharing } from '../../utils/quizEncoder';
-import Button from '../components/Button';
+import Button from '../UI/Button';
 
 const Results = ({ quiz, answers, userName, startTime }) => {
   const [score, setScore] = useState(0);

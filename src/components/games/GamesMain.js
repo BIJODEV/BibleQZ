@@ -16,7 +16,7 @@ import BibleBookOrder from './components/BibleBookOrder';
 import BibleTimeline from './components/BibleTimeline';
 import EmojiParables from './components/EmojiParables';
 import Footer from './components/Footer';
-import Button from '../components/Button'; // Adjust path if necessary
+import Button from '../UI/Button';
 
 function GamesMain(){
   const [currentGame, setCurrentGame] = useState('menu');

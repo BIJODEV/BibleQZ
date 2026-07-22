@@ -11,7 +11,49 @@ const QuizHistory = ({ onSelectQuiz, onClose }) => {
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [viewMode, setViewMode] = useState('list'); // 'list' or 'results'
 
-  // ... [Keep existing useEffect, loadQuizHistory, formatDate, viewResults, closeResults, refreshResults logic unchanged] ...
+  useEffect(() => {
+    loadQuizHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
+  const loadQuizHistory = async () => {
+    if (user) {
+      const history = await getUserQuizzesWithResults(user.uid);
+      setQuizHistory(history);
+    }
+    setLoading(false);
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const viewResults = async (quiz) => {
+    setSelectedQuiz(quiz);
+    setViewMode('results');
+  };
+
+  const closeResults = () => {
+    setSelectedQuiz(null);
+    setViewMode('list');
+  };
+
+  const refreshResults = async () => {
+    if (selectedQuiz) {
+      const updatedResults = await getQuizResultsFromFirestore(selectedQuiz.id);
+      setSelectedQuiz(prev => ({
+        ...prev,
+        results: updatedResults?.results || [],
+        totalParticipants: updatedResults?.totalParticipants || 0
+      }));
+    }
+  };
 
   if (loading) {
     return (

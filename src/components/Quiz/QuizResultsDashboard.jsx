@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Activity, RefreshCw, Download, Trash2, BarChart2 } from 'lucide-react';
 import { listenToQuizResults } from '../../utils/firebaseQuiz';
 import { getStoredQuizResults, clearQuizResults } from '../../utils/quizEncoder'; 
-import Button from '../components/Button'; // Adjust import path to your Button component
+import Button from '../UI/Button';
 
 const QuizResultsDashboard = ({ quizId, quizTitle, isFirebase = false }) => {
   const [results, setResults] = useState([]);

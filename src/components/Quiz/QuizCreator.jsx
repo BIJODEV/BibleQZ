@@ -37,7 +37,206 @@ const QuizCreator = () => {
   const MAX_QUESTIONS = 35;
   const WARNING_THRESHOLD = 30;
 
-  // ... [Keep all existing logic/handlers exactly the same: addQuestion, updateQuestion, removeQuestion, updateOption, updateNumberOfOptions, validateQuiz, handleSelectQuizFromHistory, handleViewResultsFromHistory, generateShareLink, copyToClipboard, clearSelectedQuiz] ...
+  const addQuestion = () => {
+    if (quiz.questions.length >= MAX_QUESTIONS) {
+      alert(`Maximum ${MAX_QUESTIONS} questions allowed per quiz. Consider breaking this into multiple quizzes for better participant engagement.`);
+      return;
+    }
+
+    if (quiz.questions.length >= WARNING_THRESHOLD) {
+      const remaining = MAX_QUESTIONS - quiz.questions.length;
+      const shouldContinue = window.confirm(
+        `You have ${quiz.questions.length} questions (${remaining} remaining).\n\n` +
+        `Long quizzes can be tiring for participants. Are you sure you want to add another question?`
+      );
+      if (!shouldContinue) return;
+    }
+
+    setQuiz(prev => ({
+      ...prev,
+      questions: [
+        ...prev.questions,
+        {
+          id: Date.now(),
+          question: '',
+          options: ['', '', '', ''],
+          correctAnswer: 0,
+          explanation: '',
+          numberOfOptions: 4
+        }
+      ]
+    }));
+  };
+
+  const updateQuestion = (questionId, updates) => {
+    setQuiz(prev => ({
+      ...prev,
+      questions: prev.questions.map(q =>
+        q.id === questionId ? { ...q, ...updates } : q
+      )
+    }));
+  };
+
+  const removeQuestion = (questionId) => {
+    if (quiz.questions.length > 1) {
+      setQuiz(prev => ({
+        ...prev,
+        questions: prev.questions.filter(q => q.id !== questionId)
+      }));
+    }
+  };
+
+  const updateOption = (questionId, optionIndex, value) => {
+    setQuiz(prev => ({
+      ...prev,
+      questions: prev.questions.map(q =>
+        q.id === questionId
+          ? {
+              ...q,
+              options: q.options.map((opt, idx) =>
+                idx === optionIndex ? value : opt
+              )
+            }
+          : q
+      )
+    }));
+  };
+
+  const updateNumberOfOptions = (questionId, newNumberOfOptions) => {
+    setQuiz(prev => ({
+      ...prev,
+      questions: prev.questions.map(q => {
+        if (q.id === questionId) {
+          const currentOptions = [...q.options];
+
+          let newOptions;
+          if (newNumberOfOptions > currentOptions.length) {
+            newOptions = [...currentOptions, ...Array(newNumberOfOptions - currentOptions.length).fill('')];
+          } else {
+            newOptions = currentOptions.slice(0, newNumberOfOptions);
+          }
+
+          let newCorrectAnswer = q.correctAnswer;
+          if (q.correctAnswer >= newNumberOfOptions) {
+            newCorrectAnswer = newNumberOfOptions - 1;
+          }
+
+          return {
+            ...q,
+            numberOfOptions: newNumberOfOptions,
+            options: newOptions,
+            correctAnswer: newCorrectAnswer
+          };
+        }
+        return q;
+      })
+    }));
+  };
+
+  const validateQuiz = () => {
+    if (!quiz.title.trim()) {
+      alert('Please enter a quiz title');
+      return false;
+    }
+
+    if (!quiz.passage.trim()) {
+      alert('Please enter a Bible passage');
+      return false;
+    }
+
+    for (let i = 0; i < quiz.questions.length; i++) {
+      const q = quiz.questions[i];
+      if (!q.question.trim()) {
+        alert(`Please enter question ${i + 1}`);
+        return false;
+      }
+
+      for (let j = 0; j < q.numberOfOptions; j++) {
+        if (!q.options[j].trim()) {
+          alert(`Please enter all options for question ${i + 1}`);
+          return false;
+        }
+      }
+    }
+
+    return true;
+  };
+
+  const handleSelectQuizFromHistory = (quizFromHistory) => {
+    setQuiz({
+      title: `${quizFromHistory.title} (Copy)`,
+      passage: quizFromHistory.passage,
+      description: quizFromHistory.description || '',
+      questions: quizFromHistory.questions.map(q => ({
+        ...q,
+        id: Date.now() + Math.random(),
+        numberOfOptions: q.numberOfOptions || q.options.length
+      }))
+    });
+    setShowHistory(false);
+  };
+
+  const handleViewResultsFromHistory = (quizFromHistory) => {
+    setSelectedQuizFromHistory(quizFromHistory);
+    setActiveTab('results');
+    setShowHistory(false);
+  };
+
+  const generateShareLink = async () => {
+    if (!validateQuiz()) return;
+
+    setCreatingQuiz(true);
+
+    if (!quiz.id) {
+      quiz.id = 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    const quizData = {
+      ...quiz,
+      createdAt: new Date().toISOString(),
+      version: '1.0'
+    };
+
+    const success = await createQuizInFirestore(quizData);
+
+    if (success && user) {
+      await saveQuizToUserHistory(user.uid, {
+        id: quizData.id,
+        title: quizData.title,
+        passage: quizData.passage,
+        description: quizData.description,
+        questions: quizData.questions,
+        createdAt: quizData.createdAt,
+        shareLink: `${window.location.origin}/quiz?quizId=${quizData.id}`
+      });
+
+      const link = `${window.location.origin}/quiz?quizId=${quizData.id}`;
+      setShareLink(link);
+      setQuiz(quizData);
+    } else if (success) {
+      const link = `${window.location.origin}/quiz?quizId=${quizData.id}`;
+      setShareLink(link);
+      setQuiz(quizData);
+    } else {
+      alert('Failed to create quiz. Please try again.');
+    }
+
+    setCreatingQuiz(false);
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(shareLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  const clearSelectedQuiz = () => {
+    setSelectedQuizFromHistory(null);
+  };
 
   return (
     <div className="space-y-8">
