@@ -8,7 +8,7 @@ const Footer = () => {
     <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200/60">
       {/* Simple Copyright Footer */}
       <div className="text-center text-gray-500 text-xs sm:text-sm mb-4">
-        <p>© {currentYear} Youth Bible Challenge. Built with ❤️ for spiritual growth.</p>
+        <p>{`© ${currentYear} Youth Bible Challenge. Built with ❤️ for spiritual growth.`}</p>
       </div>
 
       {/* Know Your Church - Minimal Footer Link */}
